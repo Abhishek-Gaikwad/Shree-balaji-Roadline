@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Trans9.Models
 {
+    //login model Hellow
     public class LoginModel
     {
         public string? userName { get; set; }
