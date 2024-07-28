@@ -1,0 +1,144 @@
+﻿@model Trans9.Models.Payroll
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEditPayroll" asp-route-id="@Model.payrollId" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="payrollId" />
+            <div class="row">
+                <div class="col-md-12">
+                    <fieldset>
+                        <legend>SUMMARY</legend>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="employeeId" class="control-label"></label>
+                                    <select class="form-control selectpicker" asp-for="employeeId" data-live-search="true" required>
+                                        @foreach (var item in Model.ddl)
+                                        {
+                                            <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                    <input asp-for="employeeId" style="display:none;" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label asp-for="basic" class="control-label"></label>
+                                    <input asp-for="basic" class="form-control" />
+                                    <span asp-validation-for="basic" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="allowances" class="control-label">ALLOWANCES</label>
+                                    <input id="allowances" class="form-control" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="deductions" class="control-label">DEDUCTIONS</label>
+                                    <input id="deductions" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="netsalary" class="control-label">NET SALARY</label>
+                                    <input id="netsalary" class="form-control" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>ALLOWANCES</legend>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="hra" class="control-label"></label>
+                                    <input asp-for="hra" class="form-control" />
+                                    <span asp-validation-for="hra" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="lta" class="control-label"></label>
+                                    <input asp-for="lta" class="form-control" />
+                                    <span asp-validation-for="lta" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="conveniance" class="control-label"></label>
+                                    <input asp-for="conveniance" class="form-control" />
+                                    <span asp-validation-for="conveniance" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="oa" class="control-label"></label>
+                                    <input asp-for="oa" class="form-control" />
+                                    <span asp-validation-for="oa" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>DEDUCTIONS</legend>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="hic" class="control-label"></label>
+                                    <input asp-for="hic" class="form-control" />
+                                    <span asp-validation-for="hic" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="pt" class="control-label"></label>
+                                    <input asp-for="pt" class="form-control" />
+                                    <span asp-validation-for="pt" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="pf" class="control-label"></label>
+                                    <input asp-for="pf" class="form-control" />
+                                    <span asp-validation-for="pf" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="od" class="control-label"></label>
+                                    <input asp-for="od" class="form-control" />
+                                    <span asp-validation-for="od" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary btn-block btn-sm" />
+                        <input type="hidden" asp-for="createdBy" />
+                        <input type="hidden" asp-for="status" />
+                        <input type="hidden" asp-for="createdDate" />
+                        <input type="hidden" asp-for="updatedBy" />
+                        <input type="hidden" asp-for="updatedDate" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Trans9.Models.Authority>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-2" style="height: 450px;">
+            <table class="table" id="report-table">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            ACTION
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.licenceNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.authorityDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.modelDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.chasisNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.location)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        int n = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(n++)</td>
+                                <td><a href="@Url.Action("authorityprint","Incidence",new { id=item.Id},Context.Request.Scheme)" target="_blank" class="btn btn-info btn-sm"><span class="fa fa-print"></span></a></td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.licenceNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.authorityDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.modelDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.chasisNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.location)
+                                </td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

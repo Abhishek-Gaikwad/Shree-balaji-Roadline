@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Trans9.Models.Payroll>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-0" style="height: 450px;">
+            <table class="table table-head-fixed text-nowrap table-bordered table-hover">
+                <thead class="header">
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            EMPLOYEE NAME
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.basic)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.hra)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.lta)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.conveniance)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.oa)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.hic)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.pt)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.pf)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.od)
+                        </th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(i++)</td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.employeeName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.basic)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.hra)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.lta)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.conveniance)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.oa)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.hic)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.pt)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.pf)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.od)
+                                </td>
+                                <td>
+                                    <a onclick="showInPopup('@Url.Action("AddOrEditPayroll","Employee",new { id=item.payrollId},Context.Request.Scheme)', 'Update Payroll')" class="text-primary"><span class="fa fa-pencil-alt"></span></a>
+                                    <form id="@("form"+item.payrollId)" asp-action="delete-payroll" asp-route-id="@item.payrollId" onsubmit="return jQueryAjaxDelete(this);" class="d-inline">
+                                        <a onclick="javascript:$('#@("form"+item.payrollId)').submit()" class="text-danger"><span class="fa fa-trash"></span></a>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

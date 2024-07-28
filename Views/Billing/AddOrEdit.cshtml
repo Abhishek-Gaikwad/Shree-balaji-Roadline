@@ -1,0 +1,32 @@
+﻿@model Trans9.Models.BillingModel
+
+@{
+    Layout = null;
+}
+<form asp-action="AddOrEdit" onsubmit="return jQueryIncidencePost(this);" id="billing-form" autocomplete="off">
+    <div class="row">
+        <input type="hidden" asp-for="shipmentNos" />
+        <div class="col-md-3 form-group">
+            <label asp-for="billingDate" class="control-label"></label>
+            <input asp-for="billingDate" class="form-control" />
+        </div>
+        <div class="col-md-3 form-group">
+            <button type="submit" id="submit" class="btn btn-primary btn-block btn-sm mt-4" onclick="return calculateBilling()">Generate Bill</button>
+        </div>
+        <div class="col-md-3 form-group">
+            <input type="hidden" asp-for="createdBy" />
+            <input type="hidden" asp-for="status" />
+            <input type="hidden" asp-for="createdDate" />
+            <input type="hidden" asp-for="updatedBy" />
+            <input type="hidden" asp-for="updatedDate" />
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="col-md-12">
+        @await Html.PartialAsync("_ViewAllShipments", Model.shipmentList)
+    </div>
+</div>
+@section Scripts {
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }

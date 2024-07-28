@@ -1,0 +1,79 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.97.0" />
+    <PackageReference Include="EPPlus" Version="7.0.5" />
+    <PackageReference Include="ExcelDataReader" Version="3.6.0" />
+    <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.12" />
+    <PackageReference Include="MySql.Data" Version="8.0.31" />
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.17" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\data\" />
+    <Folder Include="wwwroot\docs\aadharcard\" />
+    <Folder Include="wwwroot\docs\bankdetail\" />
+    <Folder Include="wwwroot\docs\epod-docs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
+    <None Include="Views\Accident\Index.cshtml" />
+    <None Include="Views\Accident\_ViewAllSearch.cshtml" />
+    <None Include="Views\BillingsPending\Index.cshtml" />
+    <None Include="Views\BillingsPending\_ViewAllBillingsPending.cshtml" />
+    <None Include="Views\Bill\Index.cshtml" />
+    <None Include="Views\Bill\_ViewAllBill.cshtml" />
+    <None Include="Views\Delivered\Index.cshtml" />
+    <None Include="Views\Delivered\_ViewAllDelivered.cshtml" />
+    <None Include="Views\EpodPending\Index.cshtml" />
+    <None Include="Views\EpodPending\_ViewAllEpodPending.cshtml" />
+    <None Include="Views\Plant\Index.cshtml" />
+    <None Include="Views\Plant\_ViewAllPlant.cshtml" />
+    <None Include="Views\QuoatationCount\Index.cshtml" />
+    <None Include="Views\QuoatationCount\_ViewAllQuoatationCount.cshtml" />
+    <None Include="Views\Transit\Index.cshtml" />
+    <None Include="Views\Transit\_ViewAllTransit.cshtml" />
+    <None Include="Views\Yard\Index.cshtml" />
+    <None Include="Views\Yard\_ViewAllYard.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Report\billing-report.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Marching\print.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Report\diesel-report.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Report\payment-receipt-report.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties wwwroot_4dist_4css_4alt_4adminlte_1core_1css_1map__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>

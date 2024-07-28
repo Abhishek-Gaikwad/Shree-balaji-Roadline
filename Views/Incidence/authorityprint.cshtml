@@ -1,0 +1,174 @@
+﻿@model Trans9.Models.Authority
+@section Styles{
+    <style type="text/css">
+        .table {
+            font-size: 19px !important;
+        }
+
+        .invoice {
+            background-color: #fff;
+            color: #000 !important;
+            border: 1px #000 solid !important;
+            border-radius: 18px !important;
+        }
+
+        .input-group {
+            width: 30% !important;
+        }
+
+        .invoice-info {
+            font-size: 19px;
+        }
+
+        .report-print {
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+
+        h3 {
+            margin: 0px !important;
+        }
+
+        .table td, .table th {
+            padding: 2px 2px 2px 7px;
+        }
+
+        .sign {
+            padding: 5px 5px 0px 16px;
+            font-size: 19px;
+        }
+
+        .sign-panel {
+            padding: 0px 20px;
+        }
+
+            .sign-panel > img {
+                width: 150px !important;
+            }
+
+        hr {
+            margin-top: 8px;
+            margin-bottom: 10px;
+            border: 0;
+            border-top: 1px solid rgb(0 0 0 / 65%);
+        }
+
+        .card-header {
+            border: none !important;
+        }
+
+        .vc-head th {
+            color: black !important;
+            background-color: #00669900 !important;
+            font-weight: bold !important;
+        }
+
+        .cv-body span, .cv-body p {
+            border-bottom: dotted #0000008f 1px !important;
+            width: 70% !important;
+            display: initial !important;
+        }
+
+        .containt {
+            background-color: #fff;
+            color: #000 !important;
+        }
+    </style>
+}
+    <section class="content report-print">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Main content -->
+                    <div class="invoice p-3 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card-header" style="text-align: center;">
+                                    <h1><strong>SHREE BALAJI LOGISTICS</strong></h1>
+                                    <p style="font-size: 20px;">
+                                        Flat No.4,A-04,Morisis Hsg. Society,Plot No. RH-23/1,G-Block,Sambhaji Nagar,<br />
+                                        Chinchwad, Pune - 411019.Mob.: 8888825406,7262000062,9028070524
+                                        Email : shreebalajilohistics1@rediffmail.com
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- title row -->
+                        <div class="p-3 mb-3">
+                            <!-- title row -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card-header" style="text-align: center;">
+                                        <h4><strong> Authority Letter </strong></h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>
+                                        <small class="float-right">Date: @DateTime.Now.Date
+                                        </small>
+                                    </h4>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- info row -->
+                            <div class="row invoice-info">
+                                <!-- /.col -->
+                                <div class="col-sm-12 invoice-col">
+                                    To
+                                    <address>
+                                        <strong>Works Manager</strong><br />
+                                        @Model.tassName <br>
+                                        @Model.tassLocation
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row invoice-info">
+                                <div class="col-sm-12 invoice-col">
+                                    <p>Subject:-Authority letter for collection of DAC Vehicle from your Workshop.</p>
+                                </div>
+                                <div class="col-sm-12 invoice-col">
+                                    <p> Respected Sir,</p>
+                                    <!-- letter body -->
+                                    <p style="text-indent: 50px;">With reference to above subject we are deputing our below representative for collection of below DAC vehicle from your workshop after the repairs.. So we kindly request you to please handover the vehicle with all necessary documents to our representative after issuance of eway bill and CRTM from our end.</p>
+                                    <p>Model Description - @Model.modelDesc</p>
+                                    <p>Destination - @Model.location </p>
+                                    <p>Chassis No - @Model.chasisNo</p>
+                                    <p>Name of representative - @Model.RName</p>
+                                    <p>Driving licence no - @Model.licenceNo</p>
+                                    <p>Sir ,we kindly request you to please do the needful.</p>
+                                    <p>Yours Faithfully</p>
+                                </div>
+                                <div class="col-sm-12 invoice-col">
+                                    <div class="sign-panel">
+                                        <img src="../../docs/sbl-stamp.png" />
+                                    </div>
+                                    <p>SHREE BALAJI LOGISTICS</p>
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                            <!-- this row will not appear when printing -->
+                            <div class="row no-print">
+                                <div class="col-12">
+                                    <button onclick="printReport();" class="btn btn-primary float-right"><i class="fas fa-print"></i> Print</button>
+                                    @*<button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                        <i class="fas fa-download"></i> Generate PDF
+                                    </button>*@
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.invoice -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+    </section>
+
+    @section Scripts {
+    <script>
+        function printReport() {
+            window.print();
+        }
+    </script>
+}

@@ -1,0 +1,136 @@
+﻿@model IEnumerable<Trans9.Models.ExpenseReport>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-2" style="height: 450px;">
+            <table class="table" id="report-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.chassisNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.dealerName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.destination)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.modelDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.totalHsd)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.spotHsd)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.spotAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.inHandDiesal)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.driverPayment)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.enroute)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.fastagCharges)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.extraPayment)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.paymentNaration)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.postDeliveryexp)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.postExpNaration)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.totalExpense)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.chassisNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dealerName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.destination)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.modelDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.totalHsd)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.spotHsd)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.spotAmount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.inHandDiesal)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.driverPayment)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.enroute)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.fastagCharges)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.extraPayment)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.paymentNaration)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.postDeliveryexp)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.postExpNaration)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.totalExpense)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

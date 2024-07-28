@@ -1,0 +1,40 @@
+﻿@model Trans9.Models.BulkInsert
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-6">
+        <p>Notes: </p>
+        <ul>
+            <li>
+                Please download sample file from below Links
+                <ul>
+                    <li><a href="../../dist/template/mfgroute.xls">mfgroute.xls</a>   OR  </li>
+                    <li><a href="../../dist/template/mfgroute.xlsx">mfgroute.xlsx</a></li>
+                </ul>
+            </li>
+            <li>Remove existing records from row number 2.</li>
+            <li>Do not remove/modify existing headers</li>
+            <li>Update sheets with new data which you want to add</li>
+            <li>Upload the file</li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <form asp-action="AddBulk" onsubmit="return jQueryBulkPost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="dataFile" class="control-label"></label>
+                <input asp-for="dataFile" class="form-control" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                <span asp-validation-for="dataFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Upload & Submit" class="btn btn-primary btn-block btn-sm" />
+                <input type="hidden" asp-for="createdBy" />
+                <input type="hidden" asp-for="status" />
+                <input type="hidden" asp-for="createdDate" />
+                <input type="hidden" asp-for="updatedBy" />
+                <input type="hidden" asp-for="updatedDate" />
+            </div>
+        </form>
+    </div>
+</div>

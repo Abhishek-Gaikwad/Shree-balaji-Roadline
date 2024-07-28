@@ -1,0 +1,27 @@
+﻿@model Trans9.Models.IbBillingModel
+
+@{
+    Layout = null;
+}
+<form asp-action="update" onsubmit="return jQueryIncidencePost(this);" id="billing-form" autocomplete="off">
+    <div class="row">
+        <div class="col-md-3 form-group">
+            <label asp-for="invoiceNo" class="control-label"></label>
+            <input asp-for="invoiceNo" class="form-control" required="required"/>
+        </div>
+        <div class="col-md-2 form-group">
+            <label asp-for="invoiceDate" class="control-label"></label>
+            <input asp-for="invoiceDate" class="form-control" required="required" />
+        </div>
+        <div class="col-md-2 form-group">
+            <label asp-for="poNumber" class="control-label"></label>
+            <input asp-for="poNumber" class="form-control" required="required" />
+        </div>
+        <div class="col-md-2 form-group">
+            <button type="submit" id="submit" class="btn btn-primary btn-block btn-sm mt-4" onclick="return calculateBilling()">update Bill</button>
+        </div>
+    </div>
+</form>
+@section Scripts {
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }

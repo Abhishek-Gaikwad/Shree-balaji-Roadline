@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Trans9.Models.Payment>
+
+ @if (Model.Any())
+    {int i = 1;
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(i++)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.voucherNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.voucherDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.remark)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.payMode)
+                </td>
+            </tr>
+        }
+    }

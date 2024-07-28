@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Trans9.Models.EwayReport>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-2" style="height: 450px;">
+            <table class="table" id="report-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ewayBillNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.issueDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.expiryDate)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ewayBillNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.issueDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.expiryDate)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

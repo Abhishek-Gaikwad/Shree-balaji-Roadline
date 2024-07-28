@@ -1,0 +1,321 @@
+﻿@model Trans9.Models.Marching
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <input type="hidden" value="@ViewBag.errorMessage" id="error" />
+        <form asp-action="AddOrEdit" asp-route-id="@Model.voucherNo" onsubmit="return jQueryIncidencePost(this);" enctype="multipart/form-data" onload="return calculateHsd();" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="voucherNo" />
+            <input type="hidden" asp-for="shipmentId" />
+            <div class="row ">
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-md-3 input-control-prefix">
+                            <label asp-for="shipmentNo" class="control-label"></label>
+                            <input asp-for="shipmentNo" class="input-group-text" readonly />
+                        </div>
+                        <div class="col-md-6 input-control-prefix">
+                            <label asp-for="chasisNo" class="control-label"></label>
+                            <input asp-for="chasisNo" class="input-group-text" readonly />
+                        </div>
+                        <div class="col-md-3 input-control-prefix">
+                            <label asp-for="plantOutDate" class="control-label"></label>
+                            <input asp-for="plantOutDate" class="input-group-text" readonly />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 input-control-prefix">
+                            <label asp-for="destination" class="control-label"></label>
+                            <input asp-for="destination" class="input-group-text" readonly />
+                        </div>
+                        <div class="col-md-6 input-control-prefix">
+                            <label asp-for="model" class="control-label"></label>
+                            <input asp-for="model" class="input-group-text" readonly />
+                        </div>
+                        <div class="col-md-3 input-control-prefix">
+                            <label asp-for="estimatedDate" class="control-label"></label>
+                            <input asp-for="estimatedDate" class="input-group-text" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="inchargeId" class="control-label"></label>
+                    <select class="form-control selectpicker" asp-for="inchargeId" data-live-search="true" required>
+                        @foreach (var item in Model.driverList)
+                        {
+                            <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="inchargeId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="tempRegNo" class="control-label"></label>
+                    <input asp-for="tempRegNo" class="form-control" />
+                    <span asp-validation-for="tempRegNo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Driver Info</legend>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label" id="lbl-driver" asp-for="driverId"></label> <span><input type="checkbox" id="isNew" class="ml-3" onchange="return checkIsNewDriver(this);"> Add New</span>
+                                <select class="form-control selectpicker" asp-for="driverId" data-live-search="true" onchange="return getDriverDetails(this)" required>
+                                    @foreach (var item in Model.driverList)
+                                    {
+                                        <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                                <input asp-for="driverName" style="display:none;" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" asp-for="photo"></label>
+                                    <div class="input-group">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <input class="form-control" type="file" asp-for="photo" accept="image/*" onchange="return showPreview(this)" />
+                                            </div>
+                                            <div class="col-md-2" style="padding-left: 8px;">
+                                                <a href="#" onclick="return openCamera();" class="btn btn-sm btn-warning"><span class="fa fa-camera"></span></a>
+                                                <input type="hidden" asp-for="cameraPhoto" />
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="photo-preview" style="height: 26px; min-width:21px;">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-md-6">
+                                <label class="control-label" asp-for="aadharNo"></label>
+                                <input class="form-control" asp-for="aadharNo" placeholder="Enter Aadhar No" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label" asp-for="aadharcard"></label>
+                                <div class="input-group">
+                                    <input class="form-control" type="file" asp-for="aadharcard" accept="image/*" multiple onchange="return showPreview(this)" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="aadharcard-preview">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-md-6">
+                                <label class="control-label" asp-for="dlNo"></label>
+                                <input class="form-control" asp-for="dlNo" placeholder="Enter license No" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label" asp-for="licensecard"></label>
+                                <div class="input-group">
+                                    <input class="form-control" type="file" asp-for="licensecard" accept="image/*" multiple onchange="return showPreview(this)" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="licensecard-preview">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>                           
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label" asp-for="mobileNo"></label>
+                                <input class="form-control" asp-for="mobileNo" placeholder="" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label" asp-for="bankdetail"></label>
+                                <div class="input-group">
+                                    <input class="form-control" type="file" asp-for="bankdetail" accept="image/*" multiple onchange="return showPreview(this)" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="bankdetail-preview">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="licenseExpDate" class="control-label"></label>
+                            <input asp-for="licenseExpDate" class="form-control" />
+                            <span asp-validation-for="licenseExpDate" class="text-danger"></span>
+                        </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Expenses Info</legend>
+                        <div class="row ">
+                            <div class="form-group col-md-6">
+                                <label asp-for="totalHsd" class="control-label"></label>
+                                <input asp-for="totalHsd" class="form-control" readonly="readonly" />
+                                <span asp-validation-for="totalHsd" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label asp-for="sblKm" class="control-label"></label>
+                                <input asp-for="sblKm" class="form-control" readonly="readonly" />
+                                <span asp-validation-for="sblKm" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <fieldset class="spot">
+                            <legend>Spot Diesel</legend>
+                            <div class="row ">
+                                <div class="form-group col-md-6">
+                                    <label asp-for="pumpName" class="control-label"></label>
+                                    <select class="form-control select2" asp-for="pumpName" asp-items="@(new SelectList(Model.pumpList, "Id", "Name"))" onchange="return getPumpDetails(this);"></select>
+                                    <span asp-validation-for="pumpName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="receiptNo" class="control-label"></label>
+                                    <input asp-for="receiptNo" class="form-control" />
+                                    <span asp-validation-for="receiptNo" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="form-group col-md-4">
+                                    <label asp-for="spdQty" class="control-label" onkeyup="return calculateHsd();"></label>
+                                    <input asp-for="spdQty" class="form-control" />
+                                    <span asp-validation-for="spdQty" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="spdRate" class="control-label"></label>
+                                    <input asp-for="spdRate" class="form-control" onkeyup="return calculateHsd();" />
+                                    <span asp-validation-for="spdRate" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="spdAmount" class="control-label"></label>
+                                    <input asp-for="spdAmount" class="form-control" readonly="readonly" />
+                                    <span asp-validation-for="spdAmount" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>In-Route</legend>
+                        <div class="row ">
+                            <div class="form-group col-md-4">
+                                <label asp-for="inRouteExp" class="control-label"></label>
+                                <input asp-for="inRouteExp" class="form-control" onkeyup="return calculateExpense();" />
+                                <span asp-validation-for="inRouteExp" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label asp-for="tollExp" class="control-label"></label>
+                                <input asp-for="tollExp" class="form-control" onkeyup="return calculateExpense();" />
+                                <span asp-validation-for="tollExp" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="total-inroot" class="control-label">Total En-Route</label>
+                                <input id="total-inroot" class="form-control" value="@(Model.inRouteExp-Model.tollExp)" readonly="readonly" />
+                                <span class="text-danger">( InRoute - Fastag )</span>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>In-Hand</legend>
+                        <div class="row ">
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Remaining Diesel</label>
+                                <span class="input-group-text" id="remainhsd-prefix" data-rate="90">@(Math.Round(Model.totalHsd, 2) + " * 90")</span>
+                                <div class="input-group">
+                                    <input class="form-control" type="text" id="remainhsd" name="remainhsd" value="@(Math.Round(Model.totalHsd, 2)*90)" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label asp-for="driverPayment" class="control-label"></label>
+                                <span class="input-group-text" id="driverPayment-rate" data-rate="1.25">@Model.sblKm * 1.25</span>
+                                <div class="input-group">
+                                    <input asp-for="driverPayment" class="form-control" value="@(Model.sblKm * (decimal)1.25)" readonly="readonly" />
+                                </div>
+                                <span asp-validation-for="driverPayment" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label asp-for="loadingCharge" class="control-label"></label>
+                                <input asp-for="loadingCharge" class="form-control" onkeyup="return calculateTotalExpense()" />
+                                @*<select class="form-control select2" asp-for="loadingCharge" asp-items="@(new SelectList(Model.loadingCharges, "Id", "Name"))"></select>*@
+                                <span asp-validation-for="loadingCharge" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Extra Expenses</legend>
+                        <div class="row ">
+                            <div class="form-group col-md-4">
+                                <label asp-for="extraAmt" class="control-label"></label>
+                                <input asp-for="extraAmt" class="form-control" onkeyup="return calculateTotalExpense()" />
+                                <span asp-validation-for="extraAmt" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label asp-for="remark" class="control-label"></label>
+                                <input asp-for="remark" class="form-control" />
+                            </div>
+
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="totalExp" class="control-label"></label>
+                        <input asp-for="totalExp" class="form-control" readonly="readonly" />
+                        <span class="text-danger">( Total In-Route + Remaining Diesel + Driver Payment -Loading Charges )</span>
+                        <span asp-validation-for="totalExp" class="text-danger"></span>
+                    </div>
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block btn-sm" />
+                    <input type="hidden" asp-for="createdBy" />
+                    <input type="hidden" asp-for="status" />
+                    <input type="hidden" asp-for="createdDate" />
+                    <input type="hidden" asp-for="actualMarching" />
+                    <input type="hidden" asp-for="updatedBy" />
+                    <input type="hidden" asp-for="updatedDate" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODEL GOES HERE-->
+<div class="modal modal-camera" role="dialog" id="camera-model">
+    <div class="modal-dialog">
+        <div class="modal-content modal-content-camera">
+            <div class="modal-header">
+                <h5 class="modal-title">CAPTURE PHOTO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <video id="video" autoplay></video>
+                <a id="captureBtn" class="btn btn-sm btn-success btn-block" onclick="return capturePhoto();">Capture Photo</a>
+                <img id="capturedImg" src="" alt="Captured Photo">
+                <div class="button-container" id="btnGroup" style="display: none;">
+                    <div class="btn-group">
+                        <a id="recaptureBtn" class="btn btn-sm btn-warning" onclick="return reCapture();">Re-Capture</a>
+                        <a id="saveBtn" class="btn btn-sm btn-success" onclick="return savePicture();">Save Picture</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODEL END-->
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

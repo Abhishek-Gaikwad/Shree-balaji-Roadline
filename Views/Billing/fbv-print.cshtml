@@ -1,0 +1,276 @@
+﻿@model Trans9.Models.FbvInvoice
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FBV Print</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon/site.webmanifest">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <style type="text/css">
+        .table td, .table th {
+            padding: 1px 1px 1px 7px;
+        }
+
+        .sign {
+            padding: 5px 5px 0px 16px;
+        }
+
+        .sign-panel {
+            padding: 50px;
+        }
+
+        hr {
+            margin-top: 0px;
+            margin-bottom: 10px;
+            border: 0;
+            border-top: 1px solid rgb(0 0 0 / 65%);
+        }
+
+        p {
+            margin: 0px !important;
+            border-bottom: 1px dotted #000 !important;
+        }
+
+        .card-header {
+            margin: 0px !important;
+        }
+
+        tr, th, td {
+            border: 1px solid #000 !important;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Main content -->
+                        <div class="invoice p-3 mb-3">
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table center" style="border: 1px solid #000 !important;">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="6" style="text-align: center;padding: 0.75rem 0 !important;">
+                                                    <h1><strong>M/S SHREE BALAJI LOGISTICS</strong></h1>
+                                                    <h4>MORRIS HSG SOC FLAT NO A/4 RH 23 G BLOCK NEAR KASTURI MARKET SAMBHAJI NAGAR CHINCHWAD PUNE-19</h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6" style="text-align: center;">
+                                                    <h5 style="margin: 0.2rem !important;"><strong>TAX INVOICE</strong></h5>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" rowspan="5">
+                                                    @if (@Model.destId == 297)
+                                                    {
+                                                        <p>To,</p>
+                                                        <p>Tata Motors Ltd.International Business Division,</p>
+                                                        <p>C/O : Escort Logistics Pvt Ltd.Village Santoshpur,</p>
+                                                        <p>(Shiulipukur),P.O.Mediahat,Dist.- North 24 Parganas.</p>
+                                                        <p>Akaipur Gram Panchyat-743262,West Bengal,India Shiulipukur.</p>
+                                                    }
+                                                    else if (@Model.destId == 112)
+                                                    {
+                                                        <p>To,</p>
+                                                        <p>Tata Motors Ltd</p>
+                                                        <p>Rso- Shahapur (cvbu),</p>
+                                                        <p>Village Golbhan Gut No 234,2</p>
+                                                        <p>Thane - 421601</p>
+                                                        <p>Maharashtra - India</p>
+                                                    }
+                                                    else if (@Model.destId == 125)
+                                                    {
+                                                        <p>To,</p>
+                                                        <p>TML IB Patalganga</p>
+                                                        <p>ADDL INDUSTRIAL AREA PLOT D2,</p>
+                                                        <p>RASAYANI,PATALGANGA DIST RAIGAD</p>
+                                                        <p>RAIGAD PATALGANGA</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>To,</p>
+                                                        <p>Tata Motors Limited. RSO-PANVEL</p>
+                                                        <p>TATA MOTORS LTD. EXPORT VEHICLE STOCK YARD</p>
+                                                        <p>OLD PUNE MUMBAI HIGHWAY</p>
+                                                        <p>PANVEL-410221</p>
+                                                    }
+                                                </td>
+                                                <th>Invoice Number :</th>
+                                                <td colspan="2">@Model.billNo</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 16% !important;">Invoice Date :</th>
+                                                <td colspan="2">@Model.billingDate.ToString("dd-MM-yyyy")</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Vendor Code :</th>
+                                                <td colspan="2">S64690</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Location :</th>
+                                                <td colspan="2">LKO</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Department :</th>
+                                                <td colspan="2">FBV</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"></td>
+                                                <th>TML Contact e-mail :</th>
+                                                <td colspan="2"><a href="mailto:ankita.awasthi@tatamotors.com">ankita.awasthi@tatamotors.com</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"><strong>Plant Code-</strong> @Model.plantCode</td>
+                                                <td><strong>RSO Name-</strong> @(Model.destination.ToUpper())</td>
+                                                <th>PO Number :</th>
+                                                <td colspan="2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"></td>
+                                                <th>SES Number :</th>
+                                                <td colspan="2"></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 5% !important;">S No</th>
+                                                <th colspan="2" style="text-align: center;">DESCRIPTION</th>
+                                                <th>TYPE</th>
+                                                <th style="text-align: center;">RATE</th>
+                                                <th style="text-align: center;">AMOUNT</th>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="6"></td>
+                                                <th style="width: 14% !important;">Chassis Number</th>
+                                                <td style="width: 40% !important;">@Model.chasisNo</td>
+                                                <th>BASIC</th>
+                                                <td style="text-align: right; padding-right: 0.30rem !important;">@Model.basicFreight</td>
+                                                <td style="text-align: right; padding-right: 0.30rem !important;">@Model.basicFreight</td>
+                                            </tr>
+                                            <tr>
+                                                <th rowspan="2">Movement</th>
+                                                <td rowspan="2">FROM @($"{Model.dealerName.ToUpper()} TO RSO {Model.destination.ToUpper()}")</td>
+                                                <th>BASIC AMOUNT</th>
+                                                <td></td>
+                                                <td style="text-align: right; padding-right: 0.30rem !important;">@(Model.basicFreight - Model.epcAmount)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>ENROUTE</th>
+                                                <td style="text-align: right; padding-right: 0.30rem !important;">@Model.enRoute</td>
+                                                <td style="text-align: right; padding-right: 0.30rem !important;">@Model.enRoute</td>
+                                            </tr>
+                                            <tr>
+                                                <th rowspan="2">Vehicle Inwarding Date</th>
+                                                <td rowspan="2">@Model.shipmentDate.ToString("dd-MM-yyyy")</td>
+                                                <td rowspan="3" colspan="2"></td>
+                                                <td rowspan="3"></td>
+                                            </tr>
+                                            <tr>
+                                            </tr>
+                                            <tr style="height: 200px !important;">
+                                                <td colspan="2">@Model.irnNo</td><!--eway number-->
+                                            </tr>
+                                            <tr>
+                                                <th rowspan="2" colspan="2">Rupees In words:</th>
+                                                <td rowspan="2">@Model.amountInWords.ToUpper()</td>
+                                                <th colspan="2">TAXABLE AMOUNT </th>
+                                                <td style="text-align: right; padding-right: 0.30rem !important;"><strong>@Model.taxableAmount</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <th>CGST</th>
+                                                <td style="text-align:center;"><strong>9%</strong></td>
+                                                <td style="text-align: right; padding-right: 0.30rem !important;"><strong>@(Model.plantCode != 4863 ? $"{Model.gstAmount / 2}" : "-")</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2">Vendor PAN No:</th>
+                                                <td>BDOPS0723A</td>
+                                                <th>SGST</th>
+                                                <td style="text-align:center;"><strong>9%</strong></td>
+                                                <td style="text-align: right; padding-right: 0.30rem !important;"><strong>@(Model.plantCode != 4863 ? $"{Model.gstAmount / 2}" : "-")</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2">Vendor GSTN No:</th>
+                                                <td>27BDOPS0723A1ZQ</td>
+                                                <th>IGST</th>
+                                                <td style="text-align:center;"><strong>18%</strong></td>
+                                                <td style="text-align: right; padding-right: 0.30rem !important;"><strong>@(Model.plantCode == 4863 ? $"{Model.gstAmount}" : "-")</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2">TML GSTN No:</th>
+                                                <td>@Model.tmlGst</td>
+                                                <th>UGST</th>
+                                                <td style="text-align:center;"><strong>%</strong></td>
+                                                <td style="text-align: right; padding-right: 0.30rem !important;"><strong>-</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2">SAC Code:</th>
+                                                <td>996799</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2">Service Category:</th>
+                                                <td>Transport Services</td>
+                                                <th colspan="2">Total</th>
+                                                <td style="text-align: right; padding-right: 0.30rem !important;"><strong>@Model.totalFreight</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="3" colspan="3">Note: (If any....)</td>
+                                                <td colspan="3" style="text-align:center;">For Shree Balaji Logistics</td>
+                                            </tr>
+                                            <tr style="height: 150px !important;">
+                                                <td colspan="3">
+                                                    @*  <div style="text-align:center;">
+                                                    <img style="width: 150px !important;" src="../../docs/sbl-stamp.png" />
+                                                    </div>*@
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align:center;">Authorised Signatory</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- this row will not appear when printing -->
+                            <div class="row no-print">
+                                <div class="col-12">
+                                    <a href="#" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.invoice -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- Page specific script -->
+    <script>
+        window.addEventListener("load", window.print());
+    </script>
+</body>
+</html>

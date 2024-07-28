@@ -1,0 +1,89 @@
+﻿@model Trans9.Models.VcMaster
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit" asp-route-id="@Model._Id" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="_Id" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="vcNo" class="control-label"></label>
+                        <input asp-for="vcNo" class="form-control" />
+                        <span asp-validation-for="vcNo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="modelDesc" class="control-label"></label>
+                        <input asp-for="modelDesc" class="form-control" />
+                        <span asp-validation-for="modelDesc" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="mfgCode" class="control-label"></label>
+                        <input asp-for="mfgCode" class="form-control" />
+                        <span asp-validation-for="mfgCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="plantCode" class="control-label"></label>
+                        <input asp-for="plantCode" class="form-control" />
+                        <span asp-validation-for="plantCode" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="plantDesc" class="control-label"></label>
+                        <input asp-for="plantDesc" class="form-control" />
+                        <span asp-validation-for="plantDesc" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="sblKmpl" class="control-label"></label>
+                        <input asp-for="sblKmpl" class="form-control" />
+                        <span asp-validation-for="sblKmpl" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="tKmpl" class="control-label"></label>
+                        <input asp-for="tKmpl" class="form-control" />
+                        <span asp-validation-for="tKmpl" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <br />
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block btn-sm" />
+                </div>
+            </div>
+
+            <input type="hidden" asp-for="status" />
+            <input type="hidden" asp-for="createdDate" />
+            <input type="hidden" asp-for="createdBy" />
+            <input type="hidden" asp-for="updatedDate" />
+            <input type="hidden" asp-for="updatedBy" />
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

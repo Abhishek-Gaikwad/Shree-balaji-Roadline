@@ -1,0 +1,62 @@
+﻿@model Trans9.Models.DieselPayment
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEditDieselVoucher" onsubmit="return jQueryAjaxPost(this);" id="diesel-payment-voucher-form" autocomplete="off" method="post">
+            <div class="row">
+                <input type="hidden" asp-for="vouchers" />
+                <input type="hidden" asp-for="pumpId" />
+                <input type="hidden" asp-for="currentAmount" />
+                <input type="hidden" asp-for="prevBalance" />
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="pumpName" class="control-label"></label>
+                        <input asp-for="pumpName" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="voucherDate" class="control-label"></label>
+                        <input asp-for="voucherDate" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="payableAmount" class="control-label"></label>
+                        <input asp-for="payableAmount" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="paidAmount" class="control-label"></label>
+                        <input asp-for="paidAmount" onkeyup="return calculateBalance(this);" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="balanceAmount" class="control-label"></label>
+                        <input asp-for="balanceAmount" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="remark" class="control-label"></label>
+                        <input asp-for="remark" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary btn-block btn-sm mt-4" />
+                    </div>
+                        <input type="hidden" asp-for="spdQty" />
+                        <input type="hidden" asp-for="spdRate" />
+                        <input type="hidden" asp-for="spdAmount" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

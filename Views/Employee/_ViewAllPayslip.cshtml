@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Trans9.Models.PayslipRes>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-0" style="height: 450px;">
+            <table class="table table-head-fixed text-nowrap table-bordered table-hover">
+                <thead class="header">
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            EMPLOYEE NAME
+                        </th>
+                        <th>
+                            PAY MONTH
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.workedDays)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.earning)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.deduction)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.netSalary)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.paymentDate)
+                        </th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(i++)</td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.employeeName)
+                                </td>
+                                <td>
+                                    @($"{item.month} {item.year}")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.workedDays)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.earning)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.deduction)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.netSalary)
+                                </td>
+                                <td>
+                                    @(item.paymentDate.ToString("dd/MM/yyyy"))
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("print","Employee",new { id=item.payId},Context.Request.Scheme)" target="_blank"><span class="fa fa-print"></span></a>
+                                    @* <form id="@("form"+item.payId)" asp-action="delete-payroll" asp-route-id="@item.payId" onsubmit="return jQueryAjaxDelete(this);" class="d-inline">
+                                        <a onclick="javascript:$('#@("form"+item.payId)').submit()" class="text-danger"><span class="fa fa-trash"></span></a>
+                                    </form> *@
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Trans9.Models.Quotes>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-0" style="height: 450px;">
+            <table class="table table-head-fixed text-nowrap table-bordered table-hover">
+                <thead class="header">
+                    <tr>
+                        <th>
+                            ACTION
+                        </th>
+                        <th>
+                            SR.NO
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.quoteNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.quoteFor)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.quoteDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.qty)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.basicFreight)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.enRoute)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.totalFreight)
+                        </th>                      
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a onclick="showInPopup('@Url.Action("EditQuote","Quotation",new { quoteId=item.quoteId},Context.Request.Scheme)', 'Update Quotation')" class="text-primary"><span class="fa fa-pencil-alt"></span></a> |
+                                    <a href="@Url.Action("export","Quotation",new { id=item.quoteId},Context.Request.Scheme)" target="_blank" class="text-success"><span class="fas fa-file-excel"></span></a> |
+                                    <form id="@("form"+item.quoteId)" asp-action="Delete" asp-route-id="@item.quoteId" onsubmit="return jQueryAjaxDelete(this);" class="d-inline">
+                                        <a onclick="javascript:$('#@("form"+item.quoteId)').submit()" class="text-danger"><span class="fa fa-trash"></span></a>
+                                    </form>
+                                </td>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    @item.quoteNo
+                                </td>
+                                <td>
+                                    @item.quoteFor
+                                </td>
+                                <td>
+                                    @item.quoteDate
+                                </td>
+                                    <td>
+                                        @item.qty
+                                    </td>
+                                    <td>
+                                        @item.basicFreight
+                                    </td>
+                                    <td>
+                                        @item.enRoute
+                                    </td>
+                                    <td>
+                                        @item.totalFreight
+                                    </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

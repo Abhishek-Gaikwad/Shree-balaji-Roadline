@@ -1,0 +1,341 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@{
+    ViewBag.PageTitle = "Dashboard";
+}
+@*@model IEnumerable<Trans9.Models.Shipment>*@
+@model Trans9.Models.ReportModel<Dashboard>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" type="text/css" />
+
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body p-2">
+                @* <iframe title="sbldashboard" width="100%" height="600" src="@ViewBag.reportUrl" frameborder="0" allowFullScreen="true"></iframe> *@
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">@ViewBag.PageTitle</h1>
+                    </div>
+
+                  
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mt-2 mb-2">
+                <div class="card-body report-body">
+                                    <form asp-action="Dashboard-report" autocomplete="off">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label asp-for="fromDate" class="control-label"></label>
+                                                        <input asp-for="fromDate" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label asp-for="toDate" class="control-label"></label>
+                                                        <input asp-for="toDate" class="form-control" />
+                                                    </div>
+                                                </div>
+
+                                                @*<button type="submit" class="btn btn-primary md-5 mx-3">Get Data</button>*@
+                                        <div class="col-md-1 mt-4">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></button>
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Content Row -->
+                    <div class="row col-auto">
+
+                        <!-- Card One -->
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body" @* onclick="CardOne()" *@>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                IN PLANT 
+                                            </div>
+                                            <div class="h5 my-2 mb-0 font-weight-bold text-gray-800">
+                                                <span class="mx-3 text-xl" id="vehAlotCount">
+                                                    @{
+                                                        if (ViewBag.allocMonthCount != null)
+                                                        {
+                                                            @ViewBag.allocMonthCount
+                                                            ;
+                                                        }
+                                                        if (ViewBag.allocatedCount_ != null)
+                                                        {
+                                                            @ViewBag.allocatedCount_
+                                                            ;
+                                                        }
+                                                    }
+                                                </span>
+                                                <hr>
+                                                <div class="col-auto my-md-0">
+                                                    <i class="fas fa-bus text-secondary"></i>
+                                                    <span class="text-xs text-secondary"> Dealer & Customer Vehicles</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Two -->
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body" @* onclick="CardTwo()" *@>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                IN YARD 
+                                            </div>
+                                            <div class="h5 my-2 mb-0 font-weight-bold text-gray-800">
+                                                <span class="mx-3 text-xl" id="vehDispCount">
+                                                    @{
+
+                                                        if (ViewBag.dispatchMonthCount != null)
+                                                        {
+                                                            @ViewBag.dispatchMonthCount
+                                                            ;
+                                                        }
+                                                        if (ViewBag.dispatchCount_ != null)
+                                                        {
+                                                            @ViewBag.dispatchCount_
+                                                            ;
+                                                        }
+                                                    }
+                                                </span>
+                                                <hr>
+                                                <div class="col-auto my-md-0">
+                                                    <i class="fa-solid fa-truck-fast text-secondary"></i>
+                                                    <span class="text-xs text-secondary"> Gate Exit from Plant</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Three -->
+                         <!-- Card Five -->
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body" @* onclick="CardFive()" *@>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                In Transit
+                                            </div>
+                                            <div class="h5 my-2 mb-0 font-weight-bold text-gray-800">
+                                                <span class="mx-3 text-xl" id="inTransCount">
+                                                    @{
+                                                        if (ViewBag.trnMonthCount != null)
+                                                        {
+                                                            @ViewBag.trnMonthCount
+                                                            ;
+                                                        }
+                                                        if (ViewBag.inTransitCount_ != null)
+                                                        {
+                                                            @ViewBag.inTransitCount_
+                                                            ;
+                                                        }
+                                                    }
+                                                </span>
+                                                <hr>
+                                                <div class="col-auto my-md-0">
+                                                    <i class="fas fa-route text-secondary"></i>
+                                                    <span class="text-xs text-secondary"> Enroute to Destination</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     
+                    </div>
+
+
+                    <!-- Content Row -->
+                    <div class="row col-auto">
+
+                        <!-- Card Four -->
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body" @* onclick="CardFour()" *@>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Delivered Vehicles
+                                            </div>
+                                            <div class="h5 my-2 mb-0 font-weight-bold text-gray-800">
+                                                <span class="mx-3 text-xl" id="vehDelCount">
+                                                    @{
+                                                        if (ViewBag.delMonthCount != null)
+                                                        {
+                                                            @ViewBag.delMonthCount
+                                                            ;
+                                                        }
+                                                        if (ViewBag.deliveredCount_ != null)
+                                                        {
+                                                            @ViewBag.deliveredCount_
+                                                            ;
+                                                        }
+                                                    }
+                                                </span>
+                                                <hr>
+                                                <div class="col-auto my-md-0">
+                                                    <i class="fa-solid fa-truck-ramp-box text-secondary"></i>
+                                                    <span class="text-xs text-secondary"> Arrived at Destination</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body" @* onclick="CardThree()" *@>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                BILLING DONE
+                                            </div>
+                                            <div class="h5 my-2 mb-0 font-weight-bold text-gray-800">
+                                                <span class="mx-3 text-xl" id="vehTransCount">
+                                                    @{
+                                                        if (ViewBag.transDispatchMonthCount != null)
+                                                        {
+                                                            @ViewBag.transDispatchMonthCount
+                                                            ;
+                                                        }
+                                                        if (ViewBag.transDispatchCount_ != null)
+                                                        {
+                                                            @ViewBag.transDispatchCount_
+                                                            ;
+                                                        }
+                                                    }
+                                                </span>
+                                                <hr>
+                                                <div class="col-auto my-md-0">
+                                                    <i class="fa-solid fa-clipboard-check text-secondary"></i>
+                                                    <span class="text-xs text-secondary"> Vehicles Billing Done</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card Six -->
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card border-left-danger shadow h-100 py-2">
+                                <div class="card-body" @* onclick="CardSix()" *@>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                Accident/ Breakdown
+                                            </div>
+                                            <div class="h5 my-2 mb-0 font-weight-bold text-gray-800">
+                                                <span class="mx-3 text-xl" id="vehDownCount">
+                                                    @{
+                                                        if (ViewBag.abMonthCount != null)
+                                                        {
+                                                            @ViewBag.abMonthCount
+                                                            ;
+                                                        }
+                                                        if (ViewBag.accidentBreakdownCount_ != null)
+                                                        {
+                                                            @ViewBag.accidentBreakdownCount_
+                                                            ;
+                                                        }
+                                                    }
+                                                </span>
+                                                <hr>
+                                                <div class="col-auto my-md-0">
+                                                    <i class="fa-solid fa-car-burst text-secondary"></i>
+                                                    <span class="text-xs text-secondary"> Vehicle Down</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <!-- Select2 -->
+    <script src="../../plugins/select2/js/select2.min.js"></script>
+    <script src="../../js/app.js"></script>
+    <script src="../../js/site.js"></script>
+}
+
+<script>
+
+    // function CardOne() {
+    //     window.location.href = '@Url.Action("Index","Incidence")';
+    // }
+    // function CardTwo() {
+    //     window.location.href = '@Url.Action("Index","Incidence")';
+    // }
+    // function CardThree() {
+    //     window.location.href = '@Url.Action("Index","Incidence")';
+    // }
+    // function CardFour() {
+    //     window.location.href = '@Url.Action("Index","Incidence")';
+    // }
+    // function CardFive() {
+    //     window.location.href = '@Url.Action("Index","Incidence")';
+    // }
+    // function CardSix() {
+    //     window.location.href = '@Url.Action("Index","Incidence")';
+    // }
+</script>
+
+<script>
+    // Get the 'startDate' and 'endDate' input elements by their IDs
+    var startDateInput = document.getElementById("startDate");
+    var endDateInput = document.getElementById("endDate");
+
+    // Access the 'stDate' and 'endDate' values from ViewBag and convert them to JavaScript Date objects
+    var stDate = new Date('@ViewBag.StDate'); // Convert to JavaScript Date object
+    var endDate = new Date('@ViewBag.EndDate'); // Convert to JavaScript Date object
+
+    // Add one day to 'stDate' and 'endDate'
+    stDate.setDate(stDate.getDate() + 1);
+    endDate.setDate(endDate.getDate() + 1);
+
+    // Set the 'startDateInput' and 'endDateInput' values to 'stDate' and 'endDate'
+    startDateInput.valueAsDate = stDate;
+    endDateInput.valueAsDate = endDate;
+</script>

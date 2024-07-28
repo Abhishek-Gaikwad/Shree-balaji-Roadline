@@ -1,0 +1,237 @@
+﻿@model Trans9.Models.Driver
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit" asp-route-id="@Model.driverId" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="driverId" />
+            <div class="row">
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Driver Info</legend>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="driverName" class="control-label"></label>
+                                    <input asp-for="driverName" class="form-control" />
+                                    <span asp-validation-for="driverName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="aadharNo" class="control-label"></label>
+                                    <input asp-for="aadharNo" class="form-control" />
+                                    <span asp-validation-for="aadharNo" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="dlNo" class="control-label"></label>
+                                    <input asp-for="dlNo" class="form-control" />
+                                    <span asp-validation-for="dlNo" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="mobileNo" class="control-label"></label>
+                                    <input asp-for="mobileNo" class="form-control" />
+                                    <span asp-validation-for="mobileNo" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label asp-for="licenseExpDate" class="control-label"></label>
+                                    <input asp-for="licenseExpDate" class="form-control" />
+                                    <span asp-validation-for="licenseExpDate" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label asp-for="remark" class="control-label"></label>
+                                    <input asp-for="remark" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Attachments</legend>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label" asp-for="aadharcard"></label>
+                                    <div class="input-group">
+                                        <input class="form-control" type="file" asp-for="aadharcard" accept="image/*" multiple onchange="return showPreview(this)" /> <!--onchange="return showPreview(this)"-->
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="aadharcard-preview">
+                                                @{
+                                                    int i = 0;
+                                                    @foreach (var item in Model.aadharDocs)
+                                                    {
+                                                        i += 1;
+                                                        if (i == 1)
+                                                        {
+                                                            <a class="image-link" data-lightbox="aadharcard" data-title="Aadhar Card @i" href="@item"><i class="fa fa-eye"></i></a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a class="image-link" data-lightbox="aadharcard" data-title="Aadhar Card @i" href="@item"></a>
+                                                        }
+                                                    }
+                                                }
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label" asp-for="licensecard"></label>
+                                    <div class="input-group">
+                                        <input class="form-control" type="file" asp-for="licensecard" accept="image/*" multiple onchange="return showPreview(this)" /> <!--onchange="return showPreview(this)"-->
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="licensecard-preview">
+                                                @{
+                                                    i = 0;
+                                                    @foreach (var item in Model.licenseDocs)
+                                                    {
+                                                        i += 1;
+                                                        if (i == 1)
+                                                        {
+                                                            <a class="image-link" data-lightbox="licensecard" data-title="Driving License @i" href="@item"><i class="fa fa-eye"></i></a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a class="image-link" data-lightbox="licensecard" data-title="Driving License @i" href="@item"></a>
+                                                        }
+                                                    }
+                                                }
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label" asp-for="photo"></label>
+                                    <div class="input-group">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <input class="form-control" type="file" asp-for="photo" accept="image/*" multiple onchange="return showPreview(this)" />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <a href="#" onclick="return openCamera();" class="btn btn-sm btn-warning"><span class="fa fa-camera"></span> Capture</a>
+                                                <input type="hidden" asp-for="cameraPhoto" />
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="photo-preview" style="height: 26px;min-width: 8px;">
+                                                        @{
+                                                            i = 0;
+                                                            @foreach (var item in Model.photos)
+                                                            {
+                                                                i += 1;
+                                                                if (i == 1)
+                                                                {
+                                                                    <a class="image-link" data-lightbox="photo" data-title="Photo @i" href="@item"><i class="fa fa-eye"></i></a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a class="image-link" data-lightbox="photo" data-title="Photo @i" href="@item"></a>
+                                                                }
+                                                            }
+                                                        }
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label" asp-for="bankdetail"></label>
+                                    <div class="input-group">
+                                        <input class="form-control" type="file" asp-for="bankdetail" accept="image/*" multiple onchange="return showPreview(this)" /> <!--onchange="return showPreview(this)"-->
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="bankdetail-preview">
+                                                @{
+                                                    i = 0;
+                                                    @foreach (var item in Model.bankDocs)
+                                                    {
+                                                        i += 1;
+                                                        if (i == 1)
+                                                        {
+                                                            <a class="image-link" data-lightbox="bankdetail" data-title="Bank Detail @i" href="@item"><i class="fa fa-eye"></i></a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a class="image-link" data-lightbox="bankdetail" data-title="Bank Detail @i" href="@item"></a>
+                                                        }
+
+                                                    }
+                                                }
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    @if (Model.driverId != 0)
+                    {
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="status" class="control-label"></label>
+                                    <select class="form-control select2" asp-for="status" asp-items="@(new SelectList(Model.statusList, "Id", "Name"))"></select>
+                                    <span asp-validation-for="status" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary btn-block btn-sm" />
+                <input type="hidden" asp-for="createdBy" />
+                <input type="hidden" asp-for="status" />
+                <input type="hidden" asp-for="createdDate" />
+                <input type="hidden" asp-for="updatedBy" />
+                <input type="hidden" asp-for="updatedDate" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODEL GOES HERE-->
+<div class="modal modal-camera" role="dialog" id="camera-model">
+    <div class="modal-dialog">
+        <div class="modal-content modal-content-camera">
+            <div class="modal-header">
+                <h5 class="modal-title">CAPTURE PHOTO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <video id="video" autoplay></video>
+                <a id="captureBtn" class="btn btn-sm btn-success btn-block" onclick="return capturePhoto();">Capture Photo</a>
+                <img id="capturedImg" src="" alt="Captured Photo">
+                <div class="button-container" id="btnGroup" style="display: none;">
+                    <div class="btn-group">
+                        <a id="recaptureBtn" class="btn btn-sm btn-warning" onclick="return reCapture();">Re-Capture</a>
+                        <a id="saveBtn" class="btn btn-sm btn-success" onclick="return savePicture();">Save Picture</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODEL END-->
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Trans9.Models.Dealer>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-0" style="height: 450px;">
+            <table class="table table-head-fixed text-nowrap table-bordered table-hover">
+                <thead class="header">
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.dealerName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.city)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.state)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.region)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.dealerType)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.epodPerson)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.epodContact)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.epodEmail)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.pdiPerson)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.pdiContact)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.pdiEmail)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.status)
+                        </th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(i++)</td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dealerName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.city)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.state)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.region)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dealerType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.epodPerson)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.epodContact)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.epodEmail)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.pdiPerson)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.pdiContact)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.pdiEmail)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.status)
+                                </td>
+                                <td>
+                                    <a onclick="showInPopup('@Url.Action("AddOrEdit","Dealer",new { id=item.dealerId},Context.Request.Scheme)', 'Update Dealer')" class="text-primary"><span class="fa fa-pencil-alt"></span></a>
+                                    <form id="@("form"+item.dealerId)" asp-action="Delete" asp-route-id="@item.dealerId" onsubmit="return jQueryAjaxDelete(this);" class="d-inline">
+                                        <a onclick="javascript:$('#@("form"+item.dealerId)').submit()" class="text-danger"><span class="fa fa-trash"></span></a>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

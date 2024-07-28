@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Trans9.Models.EstimatedDateReport>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-2" style="height: 450px;">
+            <table class="table" id="report-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.destination)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.chasisNo)
+                        </th>
+                       @* <th>
+                            @Html.DisplayNameFor(model => model.mobileNo)
+                        </th>*@
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.expDate)
+                        </th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.destination)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.chasisNo)
+                                </td>
+                               @* <td>
+                                    @Html.DisplayFor(modelItem => item.mobileNo)
+                                </td>*@
+                                @*<td>
+                                    @Html.DisplayFor(modelItem => item.expDate)
+                                </td>*@
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

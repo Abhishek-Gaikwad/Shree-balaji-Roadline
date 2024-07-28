@@ -1,0 +1,73 @@
+﻿@model Trans9.Models.AppUser
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit" asp-route-id="@Model.id" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id" />
+            <input type="hidden" asp-for="status" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="displayName" class="control-label"></label>
+                        <input asp-for="displayName" class="form-control" />
+                        <span asp-validation-for="displayName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="userName" class="control-label"></label>
+                        <input asp-for="userName" class="form-control" />
+                        <span asp-validation-for="userName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="email" class="control-label"></label>
+                        <input asp-for="email" class="form-control" />
+                        <span asp-validation-for="email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="password" class="control-label"></label>
+                        <input asp-for="password" class="form-control" />
+                        <span asp-validation-for="password" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="roleName" class="control-label"></label>
+                        @*<select class="form-control select2" asp-for="roleName" asp-items="@(new SelectList(ViewBag.roles, "Id", "Name"))"></select>*@
+                        <select class="form-control selectpicker" asp-for="roleName" data-live-search="true" required>
+                            @foreach (var item in ViewBag.roles)
+                            {
+                                <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="roleName" class="text-danger"></span>
+                    </div>
+                </div>
+                 <div class="col-md-6">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block btn-sm mt-4" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+

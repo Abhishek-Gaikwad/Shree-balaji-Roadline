@@ -1,0 +1,63 @@
+﻿@model Trans9.Models.ReportModel<ProfitLoss>
+@section Styles{
+    <style>
+        .report-body {
+            padding: 0px 1.25rem !important;
+        }
+
+        .pl-profit {
+            color: #28a745 !important;
+        }
+
+        .pl-loss {
+            color: #dc3545 !important;
+        }
+    </style>
+}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mt-2 mb-2">
+                <div class="card-body report-body">
+                    <form asp-action="pl-report" autocomplete="off">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="fromDate" class="control-label"></label>
+                                    <input asp-for="fromDate" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="toDate" class="control-label"></label>
+                                    <input asp-for="toDate" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-3 mt-4">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="view-all-transaction">
+    @if (Model.data.Count() > 0)
+    {
+        @await Html.PartialAsync("_tableProfitAndLoss", Model.data)
+    }
+</div>
+@section Scripts {
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            $("#report-table").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["excel"]
+            }).buttons().container().appendTo('#report-table_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+}

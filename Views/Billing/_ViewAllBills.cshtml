@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Trans9.Models.Billing>
+<div class="card">
+    <div class="card-body" style="overflow-x: auto">
+        <table class="table table-bordered table-hover">
+            <thead class="header" style="color:White;background-color:#006699;font-weight:bold;">
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.billNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.billingDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.shipmentNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.billGrp)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.basicFreight)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.enRoute)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.totalFreight)
+                    </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.epcAmount)
+                    </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.taxableAmount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.gstAmount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tdsAmount)
+                    </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.penaltyAmount)
+                    </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.payableAmount)
+                    </th>
+                    @*<th>ACTION</th>*@
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    int i = 1;
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @(i++)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.billNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.billingDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.shipmentNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.billGrp)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.basicFreight)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.enRoute)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.totalFreight)
+                            </td>
+                           @* <td>
+                                @Html.DisplayFor(modelItem => item.epcAmount)
+                            </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.taxableAmount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.gstAmount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tdsAmount)
+                            </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.penaltyAmount)
+                            </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.payableAmount)
+                            </td>
+                            @*<td>
+                    <a onclick="showInPopup('@Url.Action("AddOrEdit","Billing",new { id=item.id},Context.Request.Scheme)', 'Update Billing')" class="btn btn-info btn-sm"><span class="fa fa-pencil-alt"></span></a>
+                    <form asp-action="Delete" asp-route-id="@item.id" onsubmit="return jQueryAjaxDelete(this);" class="d-inline">
+                    <button type="submit" class="btn btn-sm btn-danger"><span class="fa fa-trash"></span></button>
+                    </form>
+                    </td>*@
+                        </tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

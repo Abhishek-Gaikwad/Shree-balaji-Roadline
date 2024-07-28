@@ -1,0 +1,65 @@
+@model Trans9.Models.LoginModel;
+@{
+    Layout = "~/Views/Shared/_LayoutGuest.cshtml";
+}
+@section Styles{
+    <link href="../../css/guest.css" rel="stylesheet" />
+}
+<body class="hold-transition login-page" style="background-image: url('../../dist/img/BG1.jpg'); background-repeat:no-repeat; background-size:100% 100%">
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="login-logo">
+            <a href="@Url.ActionLink("","Home")">
+                <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light"><b>SBL</b></span>
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+                <form asp-action="login" method="post" autocomplete="off">
+                    <div class="input-group mb-3">
+                            <input asp-for="email" class="form-control" value="@Model.userName" placeholder="Username or Email Id">
+                            @*<input asp-for="email" class="form-control" value="sysadmin" placeholder="Username or Email Id">*@
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                            <input asp-for="password" class="form-control" value="@Model.password" placeholder="Password">
+                            @*<input asp-for="password" class="form-control" value="Sp0rtz@2O22" placeholder="Password">*@
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="icheck-primary">
+                                <input asp-for="isRemember">
+                                <label asp-for="isRemember"></label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-5">
+                            <button type="submit" class="btn btn-primary btn-block btn-sm">Sign In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+                <p class="mt-1 mb-0">
+                    <a href="@Url.ActionLink("forgot-password","Home")">I forgot my password</a>
+                </p>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>

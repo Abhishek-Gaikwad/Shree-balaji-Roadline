@@ -1,0 +1,38 @@
+[
+  {
+    "outputFileName": "wwwroot/js/app.min.js",
+    "inputFiles": [
+      "wwwroot/js/app.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/excelexportjs.min.js",
+    "inputFiles": [
+      "wwwroot/js/excelexportjs.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/inactivity.min.js",
+    "inputFiles": [
+      "wwwroot/js/inactivity.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/lockscreen.min.js",
+    "inputFiles": [
+      "wwwroot/js/lockscreen.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/table.min.js",
+    "inputFiles": [
+      "wwwroot/js/table.js"
+    ]
+  }
+]

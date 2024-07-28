@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Trans9.Models.Driver>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-0" style="height: 450px;">
+            <table class="table table-head-fixed text-nowrap table-bordered table-hover">
+                <thead class="header">
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.driverName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.mobileNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.dlNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.aadharNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.licenseExpDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.remark)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.status)
+                        </th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.driverName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.mobileNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dlNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.aadharNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.licenseExpDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.remark)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.status)
+                                </td>
+                                <td>
+                                    <a onclick="showInPopup('@Url.Action("AddOrEdit","Driver",new { id=item.driverId},Context.Request.Scheme)', 'Update Driver')" class="text-primary"><span class="fa fa-pencil-alt"></span></a>
+                                    <form id="@("form"+item.driverId)" asp-action="Delete" asp-route-id="@item.driverId" onsubmit="return jQueryAjaxDelete(this);" class="d-inline">
+                                        <a onclick="javascript:$('#@("form"+item.driverId)').submit()" class="text-danger"><span class="fa fa-trash"></span></a>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

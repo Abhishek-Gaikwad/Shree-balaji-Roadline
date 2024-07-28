@@ -1,0 +1,62 @@
+﻿@model Trans9.Models.MfgRoute
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit" asp-route-id="@Model._routId" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="_routId" />
+            <div class="form-group">
+                <label asp-for="mfgRoute" class="control-label"></label>
+                <input asp-for="mfgRoute" class="form-control" />
+                <span asp-validation-for="mfgRoute" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="basicRate" class="control-label"></label>
+                        <input asp-for="basicRate" class="form-control" />
+                        <span asp-validation-for="basicRate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="inroute" class="control-label"></label>
+                        <input asp-for="inroute" class="form-control" />
+                        <span asp-validation-for="inroute" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="tollExp" class="control-label"></label>
+                        <input asp-for="tollExp" class="form-control" />
+                        <span asp-validation-for="tollExp" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="totalExp" class="control-label"></label>
+                        <input asp-for="totalExp" class="form-control" />
+                        <span asp-validation-for="totalExp" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary btn-block btn-sm" />
+                <input type="hidden" asp-for="createdBy" />
+                <input type="hidden" asp-for="status" />
+                <input type="hidden" asp-for="createdDate" />
+                <input type="hidden" asp-for="updatedBy" />
+                <input type="hidden" asp-for="updatedDate" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

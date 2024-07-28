@@ -1,0 +1,133 @@
+﻿@model IEnumerable<Trans9.Models.FbvBilling>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-0" style="height: 450px;">
+            <table id="report-table" class="table table-head-fixed text-nowrap table-bordered table-hover">
+                <thead class="header">
+                    <tr>
+
+                        <th>
+                            ACTION
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.billNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.vcNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.modelDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.plantCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.chasisNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.invoiceNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.invoiceDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.trasitDays)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.basicFreight)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.enRoute)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.totalFreight)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.attachments)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @if (item.billId == 0)
+                                    {
+                                        <a onclick="showInPopup('@Url.Action("fbv-billing","Billing",new { id=item.billId,shipmentId=item.shipmentId},Context.Request.Scheme)', 'FBV Billing')" class="text-warning"><span class="far fa-file-alt"></span></a>
+                                    }
+                                    else if (item.billId != 0 && item.receivedAmount == 0)
+                                    {
+                                        <a href="@Url.Action("fbv-print","Billing",new { id=item.billId},Context.Request.Scheme)" target="_blank" class="text-primary"><span class="fa fa-print"></span></a>
+                                        <a onclick="showInPopup('@Url.Action("fbv-billing","Billing",new { id=item.billId,shipmentId=item.shipmentId},Context.Request.Scheme)', 'FBV Billing - Received Amount')" class="text-warning"><span class="far fa-money-bill-alt"></span></a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("fbv-print","Billing",new { id=item.shipmentId},Context.Request.Scheme)" target="_blank" class="text-primary"><span class="fa fa-print"></span></a>
+                                    }
+                                </td>
+                                <td>
+                                    @(item.billId == 0 ? "-" : $"{item.billNo}")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.vcNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.modelDesc)
+                                </td>
+                                <td>
+                                    @($"{item.plantCode}-{item.plantDesc}")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.chasisNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.invoiceNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.invoiceDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.trasitDays)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.basicFreight)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.enRoute)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.totalFreight)
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrWhiteSpace(item.attachments))
+                                    {
+                                        foreach (var pod in item.attachments.Split(","))
+                                        {
+                                            <a href="/@pod" target="_blank"><span class="fa fa-file-pdf"></span> view</a>
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

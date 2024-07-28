@@ -1,0 +1,229 @@
+﻿@model Trans9.Models.Shipment
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit" asp-route-id="@Model.shipmentId" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="shipmentId" />
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="cid" class="control-label"></label>
+                        <select class="form-control selectpicker" asp-for="cid" data-live-search="true" required onchange="return toggleQuote(this);">
+                            @foreach (var item in Model.companyList)
+                            {
+                                <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="cid" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group" id="quoteblock">
+                        <label asp-for="quotationId" class="control-label quotationId"></label>
+                        <select class="form-control selectpicker" asp-for="quotationId" data-live-search="true" required onchange="return toggleQuote(this);">
+                            @foreach (var item in Model.quotationList)
+                            {
+                                <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="quotationId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3" id="quotinfo" style="display:none;">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="shipmentNo" class="control-label"></label>
+                        <input asp-for="shipmentNo" class="form-control" />
+                        <span asp-validation-for="shipmentNo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="shipmentDate" class="control-label"></label>
+                        <input asp-for="shipmentDate" class="form-control" onchange="return updateInvoiceDate(this);" />
+                        <span asp-validation-for="shipmentDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="mfgRoute" class="control-label"></label>
+                        <input asp-for="mfgRoute" class="form-control" readonly="readonly" />
+                        <span asp-validation-for="mfgRoute" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Dealer</legend>
+                        <div class="row ">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="dealerId" class="control-label"></label>
+                                    <select class="form-control selectpicker" asp-for="dealerId" data-live-search="true" onchange="return getDealerDetails(this)" required>
+                                        @foreach (var item in Model.dealerList)
+                                        {
+                                            <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="dealerId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="location" class="control-label"></label>
+                                    <input asp-for="location" class="form-control" />
+                                    <span asp-validation-for="location" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Destination</legend>
+                        <div class="row ">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="detsinationId" class="control-label"></label>
+                                    <select class="form-control selectpicker" asp-for="detsinationId" data-live-search="true" onchange="return getDestinationDetails(this)" required>
+                                        @foreach (var item in Model.destinations)
+                                        {
+                                            <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="detsinationId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="region" class="control-label"></label>
+                                    <input asp-for="region" class="form-control" />
+                                    <span asp-validation-for="region" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="trasitDays" class="control-label"></label>
+                                    <input asp-for="trasitDays" class="form-control" />
+                                    <span asp-validation-for="trasitDays" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="routeCode" class="control-label"></label>
+                                    <input asp-for="routeCode" class="form-control" />
+                                    <span asp-validation-for="routeCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-6" id="vc-info">
+                    <fieldset>
+                        <legend>VC Info</legend>
+                        <div class="row ">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="vcNo" class="control-label"></label> <a href="#" onclick="showNestedPopup('@Url.Action("AddOrEdit","VcMaster",null,Context.Request.Scheme)', 'New VC')" class="mr-2" style="float: right;"><i class="fa fa-plus"></i> Add New VC</a>
+                                    <select class="form-control selectpicker" asp-for="vcNo" data-live-search="true" onchange="return getVcDetails(this)" required>
+                                        @foreach (var item in Model.vcList)
+                                        {
+                                            <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="vcNo" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="modelDesc" class="control-label"></label>
+                                    <input asp-for="modelDesc" class="form-control" />
+                                    <span asp-validation-for="modelDesc" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="mfgCode" class="control-label"></label>
+                                    <input asp-for="mfgCode" class="form-control" />
+                                    <span asp-validation-for="mfgCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="plantCode" class="control-label"></label>
+                                    <input asp-for="plantCode" class="form-control" />
+                                    <span asp-validation-for="plantCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="plantDesc" class="control-label"></label>
+                                    <input asp-for="plantDesc" class="form-control" />
+                                    <span asp-validation-for="plantDesc" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Other Info</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="chasisNo" class="control-label"></label>
+                                    <input asp-for="chasisNo" class="form-control" />
+                                    <span asp-validation-for="chasisNo" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="invoiceNo" class="control-label"></label>
+                                    <input asp-for="invoiceNo" class="form-control" />
+                                    <span asp-validation-for="invoiceNo" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input asp-for="invoiceDate" type="hidden" class="form-control" />
+                                    <input asp-for="basicFreight" type="hidden" class="form-control" readonly="readonly" />
+                                    <input asp-for="enRoute" type="hidden" class="form-control" readonly="readonly" />
+                                    <input asp-for="totalFreight" type="hidden" class="form-control" readonly="readonly" />
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary btn-block btn-sm" />
+                        <input type="hidden" asp-for="createdBy" />
+                        <input type="hidden" asp-for="status" />
+                        <input type="hidden" asp-for="createdDate" />
+                        <input type="hidden" asp-for="updatedBy" />
+                        <input type="hidden" asp-for="updatedDate" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

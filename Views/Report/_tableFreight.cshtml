@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Trans9.Models.FreightReport>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-2" style="height: 450px;">
+            <table class="table" id="report-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.routeCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.routeName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.vcNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.chassisNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.mfgCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.plantCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.plantDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.basic)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.enroute)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.routeCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.routeName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.vcNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.chassisNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.mfgCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.plantCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.plantDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.basic)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.enroute)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

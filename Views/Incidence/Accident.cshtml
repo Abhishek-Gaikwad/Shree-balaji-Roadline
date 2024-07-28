@@ -1,0 +1,122 @@
+﻿@model Trans9.Models.Incidence
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Accident" asp-route-id="@Model.id" onsubmit="return jQueryIncidencePost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="shipmentId" />
+            <input type="hidden" asp-for="id" value="@Model.id" />
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="shipmentNo" class="control-label"></label>
+                    <input asp-for="shipmentNo" class="form-control" readonly="readonly"/>
+                    <span asp-validation-for="shipmentNo" class="text-danger"></span>
+                </div>
+                    <div class="form-group col-md-4">
+                    <label asp-for="engineNo" class="control-label">Engine No</label>
+                    <input asp-for="engineNo" class="form-control" />
+                    <span asp-validation-for="engineNo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="incidenceDate" class="control-label">Accident date</label>
+                    <input asp-for="incidenceDate" class="form-control" />
+                    <span asp-validation-for="incidenceDate" class="text-danger"></span>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="incidencePlace" class="control-label">Accident place</label>
+                    <input asp-for="incidencePlace" class="form-control" />
+                    <span asp-validation-for="incidencePlace" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="depositDate" class="control-label">Date Of Deposit</label>
+                    <input asp-for="depositDate" class="form-control" />
+                    <span asp-validation-for="depositDate" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="incidenceNature" class="control-label">Details of Damages</label>
+                    <input asp-for="incidenceNature" class="form-control" />
+                    <span asp-validation-for="incidenceNature" class="text-danger"></span>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="immediateAction" class="control-label">
+                        Immediate action taken</label>
+                    <input asp-for="immediateAction" class="form-control" />
+                    <span asp-validation-for="immediateAction" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="panchnamaHeld" class="control-label">Police panchanama held</label>
+                    <input asp-for="panchnamaHeld" class="form-control" />
+                    <span asp-validation-for="panchnamaHeld" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="driverReleased" class="control-label">Driver released</label>
+                    <input asp-for="driverReleased" class="form-control" />
+                    <span asp-validation-for="driverReleased" class="text-danger"></span>
+                </div>            
+            </div>            
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="thirdPartyInvolved" class="control-label">Third party involved</label>
+                    <input asp-for="thirdPartyInvolved" class="form-control" />
+                    <span asp-validation-for="thirdPartyInvolved" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="vcHandedOver" class="control-label">Chassis handed over to dealer</label>
+                    <input asp-for="vcHandedOver" class="form-control" />
+                    <span asp-validation-for="vcHandedOver" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="pcStationName" class="control-label">Police station Name</label>
+                    <input asp-for="pcStationName" class="form-control" />
+                    <span asp-validation-for="pcStationName" class="text-danger"></span>
+                </div>            
+            </div>            
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="ChassisReleased" class="control-label">Chassis released</label>
+                    <input asp-for="ChassisReleased" class="form-control" />
+                    <span asp-validation-for="ChassisReleased" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="insSurveyDone" class="control-label">Insurance survey done</label>
+                    <input asp-for="insSurveyDone" class="form-control" />
+                    <span asp-validation-for="insSurveyDone" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="nearestDealer" class="control-label">Dealership/TASS</label>
+                    <input asp-for="nearestDealer" class="form-control" />
+                    <span asp-validation-for="nearestDealer" class="text-danger"></span>
+                </div>            
+            </div>            
+            <div class="row">
+                <div class="col-md-4">
+                    <label asp-for="incidenceFiles" class="control-label"></label>
+                    <input asp-for="incidenceFiles" class="form-control" accept="image/*" multiple />
+                    <span asp-validation-for="incidenceFiles" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="hidden" asp-for="type" />
+                        <input type="hidden" asp-for="createdBy" />
+                        <input type="hidden" asp-for="status" />
+                        <input type="hidden" asp-for="createdDate" />
+                        <input type="hidden" asp-for="updatedBy" />
+                        <input type="hidden" asp-for="updatedDate" />
+                        <button type="submit" class="btn btn-primary btn-block btn-sm mt-4"> Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

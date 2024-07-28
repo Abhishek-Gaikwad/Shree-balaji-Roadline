@@ -1,0 +1,47 @@
+﻿@model Trans9.Models.RoleModal
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit" asp-route-id="@Model.id" onsubmit="return 
+
+(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="roleName" class="control-label"></label>
+                        <input asp-for="roleName" class="form-control" />
+                        <span asp-validation-for="roleName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="pages" class="control-label"></label>
+                        @*<select class="form-control" asp-for="pages" asp-items="@(new SelectList(ViewBag.pages, "Id", "Name"))" multiple="multiple"></select>*@
+                        <select class="form-control selectpicker" asp-for="pages" data-live-search="true" multiple="multiple" required>
+                            @foreach (var item in ViewBag.pages)
+                            {
+                                <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="pages" class="text-danger"></span>
+                    </div>
+                </div>
+                 <div class="col-md-4">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block btn-sm mt-4" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+

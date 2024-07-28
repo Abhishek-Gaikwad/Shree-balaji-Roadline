@@ -1,0 +1,150 @@
+﻿@using System.Text.Json
+@inject IHttpContextAccessor Accessor
+@{
+    List<Pages> pages = new List<Pages>();
+    var user = Accessor.HttpContext.Session.GetString("username");
+    if (!string.IsNullOrEmpty(user))
+    {
+        var url = Accessor.HttpContext.Request.Path.Value;
+        var str = Accessor.HttpContext.Session.GetString("pages");
+        if (!string.IsNullOrEmpty(str))
+        {
+            pages = JsonSerializer.Deserialize<List<Pages>>(str);
+
+            url = string.IsNullOrEmpty(url) ? url : url.Substring(url.LastIndexOf("/")+1);
+            if (!string.IsNullOrEmpty(url)) {
+                pages.ForEach(x =>
+                {
+                    x.active = x.urlName.EndsWith(url) ? "active" : "";
+                });
+            }
+        }
+    }
+    else
+    {
+        Accessor.HttpContext.Response.Redirect("/Home/login");
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SBL| @ViewBag.PageTitle</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon/site.webmanifest">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="../../css/site.css">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    @RenderSection("Styles", required: false)
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <!-- Navbar -->
+        @await Html.PartialAsync("_Header", user)
+        @*@await Component.InvokeAsync("Controls", new { component = "_Header", model = String.Empty })*@
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="@Url.Action(nameof(Index), "Home")" class="brand-link">
+                <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light"><b>TRANS</b>9</span>
+            </a>
+
+            <!-- Sidebar -->
+            @await Html.PartialAsync("_Navigation", pages);
+            @*@await Component.InvokeAsync("Controls", new { component = "_Navigation", model =  String.Empty })*@
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+
+            <!-- Main content -->
+            <section class="content">
+                @RenderBody()
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- MODEL GOES HERE-->
+        <div class="modal" role="dialog" id="form-model">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+            </div>
+            <!-- LOADER-->
+            <div id="pploader" class="lds-dual-ring display-none overlay"></div>
+            <!-- ./ LOADER-->
+        </div>
+        <!-- MODEL END-->
+        <!-- MODEL GOES HERE-->
+        <div class="modal" role="dialog" id="extra-model">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+            </div>            
+            <!-- LOADER-->
+            <div id="pploader" class="lds-dual-ring display-none overlay"></div>
+            <!-- ./ LOADER-->
+        </div>
+        <!-- MODEL END-->
+        @*@await Html.PartialAsync("_Footer")*@
+        @*@await Component.InvokeAsync("Controls", new { component = "_Footer", model = String.Empty })*@
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- LOADER-->
+    <div id="loader" class="lds-dual-ring display-none overlay"></div>
+    <!-- ./ LOADER-->
+    @await Html.PartialAsync("_ScriptReferences")
+    @*@await Component.InvokeAsync("Controls", new { component = "_ScriptReferences", model = String.Empty })*@
+
+    <!-- DataTables  & Plugins -->
+    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="../../plugins/jszip/jszip.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

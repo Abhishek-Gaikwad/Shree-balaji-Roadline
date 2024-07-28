@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Trans9.Models.Shipment>
+
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-2" style="height: 450px;">
+            <table class="table table-head-fixed text-nowrap table-bordered table-hover" id="report-table">
+                <thead class="header">
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.invoiceNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.invoiceDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.modelDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.chasisNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.dest)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.dealerName)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(i++)</td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.invoiceNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.invoiceDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.modelDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.chasisNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dest)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dealerName)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

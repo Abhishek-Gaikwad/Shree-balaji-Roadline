@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Trans9.Models.EstimatedDateReport>
+@section Styles{
+    <style>
+        .report-body {
+            padding: 0px 1.25rem !important;
+        }
+    </style>
+}
+<div id="view-all-transaction">
+    @if (Model.Count() > 0)
+    {
+        @await Html.PartialAsync("_EstimatedDateTable", Model)
+    }
+</div>
+
+@section Scripts {
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            $("#report-table").DataTable({
+                "responsive": false, "lengthChange": false, "autoWidth": false,
+                "buttons": ["excel"]
+            }).buttons().container().appendTo('#report-table_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+}

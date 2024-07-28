@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Trans9.Models.Voucher>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-2" style="height: 450px;">
+            <table class="table" id="report-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ACTION</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.voucherDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentId)
+                        </th>
+                        <th>
+                            PAID TO
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.remark)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.amount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.payMode)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("print","Payment",new { id=item.id},Context.Request.Scheme)" target="_blank" class="btn btn-info btn-sm"><span class="fa fa-print"></span></a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.voucherNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.voucherDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentId)
+                                </td>
+                                <td>
+                                    To @Html.DisplayFor(modelItem => item.driverName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.remark)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.amount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.payMode)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

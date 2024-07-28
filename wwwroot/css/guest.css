@@ -1,0 +1,23 @@
+﻿.brand-image {
+    width: 3rem !important;
+}
+
+.login-logo {
+    font-size: 1.5rem !important;
+}
+
+.brand-text {
+    background-color: #fff !important;
+    border-radius: 2rem !important;
+    padding-right: 1rem !important;
+    padding-left: 3rem !important;
+}
+
+.brand-image {
+    margin-top: -6px !important;
+    margin-right: -2.9rem !important;
+}
+
+.card, .card-body {
+    border-radius: 8px !important;
+}

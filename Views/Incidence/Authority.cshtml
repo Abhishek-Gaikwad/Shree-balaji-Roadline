@@ -1,0 +1,79 @@
+﻿@model Trans9.Models.Authority
+
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Authority" asp-route-id="@Model.Id" onsubmit="return jQueryIncidencePost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="shipmentId" />
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label asp-for="modelDesc" class="control-label"></label>
+                    <input asp-for="modelDesc" class="form-control" readonly />
+                    <span asp-validation-for="modelDesc" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="location" class="control-label"></label>
+                    <input asp-for="location" class="form-control" readonly />
+                    <span asp-validation-for="location" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="chasisNo" class="control-label"></label>
+                    <input asp-for="chasisNo" class="form-control" readonly />
+                    <span asp-validation-for="chasisNo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="authorityDate" class="control-label">
+                        Date of Depositing of Vehicle
+                    </label>
+                    <input asp-for="authorityDate" class="form-control" />
+                    <span asp-validation-for="authorityDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label asp-for="tassName" class="control-label"></label>
+                    <input asp-for="tassName" class="form-control" placeholder="TASS name" required/>
+                    <span asp-validation-for="tassName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="tassLocation" class="control-label"></label>
+                    <input asp-for="tassLocation" class="form-control" placeholder="TASS Location ex. Pune " required />
+                    <span asp-validation-for="tassLocation" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="RName" class="control-label"></label>
+                    <input asp-for="RName" class="form-control" placeholder="ex. mashesh" required/>
+                    <span asp-validation-for="RName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="licenceNo" class="control-label"></label>
+                    <input asp-for="licenceNo" class="form-control" placeholder="ex. MH12 202200004268"  required/>
+                    <span asp-validation-for="licenceNo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="hidden" asp-for="createdBy" />
+                        <input type="hidden" asp-for="createdDate" />
+                        <input type="hidden" asp-for="updatedBy" />
+                        <input type="hidden" asp-for="updatedDate" />
+                        <input type="hidden" asp-for="status" />
+                        <button type="submit" class="btn btn-primary btn-block btn-sm"> Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

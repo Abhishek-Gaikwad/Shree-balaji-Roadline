@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Trans9.Models.Diesel>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-2" style="height: 450px;">
+            <table class="table" id="report-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.voucherDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.pumpName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.location)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.receiptNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.rate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.qty)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.amount)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.voucherDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.pumpName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.location)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.receiptNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.rate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.qty)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.amount)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

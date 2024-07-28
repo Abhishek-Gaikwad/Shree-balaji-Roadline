@@ -1,0 +1,85 @@
+﻿@model Trans9.Models.Incidence
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Breakdown" asp-route-id="@Model.id" onsubmit="return jQueryIncidencePost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="shipmentId" />
+            <input type="hidden" asp-for="id" value="@Model.id" />
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="shipmentNo" class="control-label"></label>
+                    <input asp-for="shipmentNo" class="form-control" readonly />
+                    <span asp-validation-for="shipmentNo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="incidenceDate" class="control-label">Date of Mechanical Defect</label>
+                    <input asp-for="incidenceDate" class="form-control" />
+                    <span asp-validation-for="incidenceDate" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="incidencePlace" class="control-label">Breakdown location with State Name.</label>
+                    <input asp-for="incidencePlace" class="form-control" />
+                    <span asp-validation-for="incidencePlace" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="incidenceNature" class="control-label">
+                        Nature of Problem
+                    </label>
+                    <input asp-for="incidenceNature" class="form-control" />
+                    <span asp-validation-for="incidenceNature" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="complaintNo" class="control-label">
+                        Complaint No given by CAC
+                    </label>
+                    <input asp-for="complaintNo" class="form-control" />
+                    <span asp-validation-for="complaintNo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="depositDate" class="control-label">
+                        Date of Depositing of Vehicle
+                    </label>
+                    <input asp-for="depositDate" class="form-control" />
+                    <span asp-validation-for="depositDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="nearestDealer" class="control-label">
+                        Nearest Dealership/TASS
+                    </label>
+                    <input asp-for="nearestDealer" class="form-control" />
+                    <span asp-validation-for="nearestDealer" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="incidenceFiles" class="control-label"></label>
+                    <input asp-for="incidenceFiles" class="form-control" accept="image/*" multiple />
+                    <span asp-validation-for="incidenceFiles" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="hidden" asp-for="type" />
+                        <input type="hidden" asp-for="createdBy" />
+                        <input type="hidden" asp-for="status" />
+                        <input type="hidden" asp-for="createdDate" />
+                        <input type="hidden" asp-for="updatedBy" />
+                        <input type="hidden" asp-for="updatedDate" />
+                        <button type="submit" class="btn btn-primary btn-block btn-sm mt-4"> Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

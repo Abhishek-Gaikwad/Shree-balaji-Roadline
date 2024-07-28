@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Trans9.Models.MfgRoute>
+@section Styles{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+    <style>
+        .table {
+            font-size: 11px;
+        }
+
+        .btn-sm {
+            padding: .25rem .5rem;
+            font-size: .875rem;
+            line-height: 1.2;
+            border-radius: 0.2rem;
+        }
+    </style>
+}
+<div class="row">
+    <div class="col-md-8">
+        <h4> @ViewBag.PageTitle</h4>
+    </div>
+    <div class="col-md-2 p-2 text-right">
+            <a onclick="showInPopup('@Url.Action("AddBulk","MfgRoute",null,Context.Request.Scheme)', 'Bulk MFG-Route')" class="btn btn-success btn-sm mr-2"><span class="fa fa-plus"></span> Add Bulk MFG-Route</a>
+            <a onclick="showInPopup('@Url.Action("AddOrEdit","MfgRoute",null,Context.Request.Scheme)', 'New MFG-Route')" class="btn btn-success btn-sm"><span class="fa fa-plus"></span> Add New MFG-Route</a>
+    </div>
+</div>
+<div id="view-all-transaction">
+    @await Html.PartialAsync("_ViewAllRoutes", Model)
+</div>
+    @section Scripts {
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="~/js/app.js"></script>
+}

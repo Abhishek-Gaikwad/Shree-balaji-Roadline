@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Trans9.Models.BillingReport>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-2" style="height: 450px;">
+            <table class="table" id="report-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.billNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.billDate)
+                        </th>   
+                        <th>
+                            @Html.DisplayNameFor(model => model.basicFreight)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.enRoute)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.discount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.taxableValue)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gstAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tmlGstNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.invoiceAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.invoiceStatus)
+                        </th>   
+                        <th>
+                            @Html.DisplayNameFor(model => model.receivedAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tdsAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.irnNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.referenceNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.paymentReceivedDate)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.billNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.billDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.basicFreight)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.enRoute)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.discount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.taxableValue)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.gstAmount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tmlGstNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.invoiceAmount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.invoiceStatus)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.receivedAmount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tdsAmount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.irnNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.referenceNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.paymentReceivedDate)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

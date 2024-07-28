@@ -1,0 +1,190 @@
+﻿@model IEnumerable<Trans9.Models.IncidenceReport>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-2" style="height: 450px;">
+            <table class="table" id="report-table">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th> ACTION </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.type)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tempRegNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.vcNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.destination)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.modelDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.driverNameandNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.engineNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.incidenceDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.incidencePlace)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.depositDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.incidenceNature)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.immediateAction)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.panchnamaHeld)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.driverReleased)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.thirdPartyInvolved)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.vcHandedOver)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.pcStationName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ChassisReleased)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.insSurveyDone)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.nearestDealer)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.complaintNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.chassisNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.invoiceNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.invoiceDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.dlNo)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("print","Incidence",new { id=item.id},Context.Request.Scheme)" target="_blank" class="btn btn-info btn-sm"><span class="fa fa-print"></span></a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.type)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tempRegNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.vcNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.destination)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.modelDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.driverNameandNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.engineNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.incidenceDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.incidencePlace)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.depositDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.incidenceNature)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.immediateAction)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.panchnamaHeld)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.driverReleased)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.thirdPartyInvolved)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.vcHandedOver)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.pcStationName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ChassisReleased)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.insSurveyDone)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.nearestDealer)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.complaintNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.chassisNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.invoiceNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.invoiceDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dlNo)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

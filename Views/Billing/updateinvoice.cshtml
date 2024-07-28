@@ -1,0 +1,69 @@
+﻿@model Trans9.Models.ReportModel<Billing>
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-6">
+        <p>Notes: </p>
+        <ul>
+            <li>Please Select Billing Reference Number</li>
+            <li>Click on Download</li>
+            <li>Do not remove/modify existing headers</li>
+            <li>update IRN Number & Received Amount in File</li>
+            <li>Do not modify other information <br />which is available in Excel sheet</li>
+            <li>Upload the file</li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <fieldset>
+            <legend>Download Data File</legend>
+            <div class="row ">
+                <div class="col-md-12">
+                    <form asp-action="exportirn" onsubmit="return jQueryDataPost(this);" autocomplete="off">
+                        <div class="form-group">
+                            <label for="referenceNo" class="control-label">Reference Nos</label>
+                            <select class="form-control selectpicker" asp-for="referenceNo" data-live-search="true" required>
+                                @foreach (var item in Model.destinations)
+                                {
+                                    <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block btn-sm">
+                                <i class="fa fa-download"></i> Download File
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Upload Data File</legend>
+            <form asp-action="updateinvoice" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+                <div class="row ">
+                    <div class="col-md-6">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="dataFile" class="control-label"></label>
+                            <input asp-for="dataFile" class="form-control" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                            <span asp-validation-for="dataFile" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="hidden" asp-for="createdBy" />
+                            <input type="hidden" asp-for="status" />
+                            <input type="hidden" asp-for="createdDate" />
+                            <input type="hidden" asp-for="updatedBy" />
+                            <input type="hidden" asp-for="updatedDate" />
+                            <button type="submit" class="btn btn-success btn-block btn-sm mt-4">
+                                <i class="fa fa-upload"></i> Upload & Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </fieldset>
+    </div>
+</div>

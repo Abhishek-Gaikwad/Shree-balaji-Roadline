@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Trans9.Models.UserRole>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-0" style="height: 450px;">
+            <table class="table table-head-fixed text-nowrap table-bordered table-hover">
+                <thead class="header">
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.roleName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.pageIds)
+                        </th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    @item.roleName
+                                </td>
+                                <td>
+                                    <p class="text-wrap">@item.pageIds</p>
+                                </td>
+                                <td>
+                                    <a onclick="showInPopup('@Url.Action("AddOrEdit","Roles",new { id=item.id},Context.Request.Scheme)', 'Update Roles')" class="text-primary"><span class="fa fa-pencil-alt"></span></a>
+                                    <form id="@("form"+item.id)" asp-action="Delete" asp-route-id="@item.id" onsubmit="return jQueryAjaxDelete(this);" class="d-inline">
+                                        <a onclick="javascript:$('#@("form"+item.id)').submit()" class="text-danger"><span class="fa fa-trash"></span></a>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

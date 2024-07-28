@@ -1,0 +1,271 @@
+﻿@model Trans9.Models.Marching
+@{
+    int i = 1;
+}
+@section Styles{
+    <style type="text/css">
+        .table {
+            font-size: 19px !important;
+        }
+
+        .invoice {
+            background-color: #fff;
+            color: #000 !important;
+        }
+
+        .invoice-info {
+            font-size: 19px;
+        }
+
+        .qtyamt{
+        text-align: right !important;
+        padding-right: 1rem !important;
+        }
+
+        .srno{
+        text-align: center !important;
+        }
+
+        .report-print {
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+
+        .table td, .table th {
+            padding: 2px 2px 2px 7px;
+        }
+
+        .sign {
+            padding: 5px 5px 0px 16px;
+            font-size: 19px;
+        }
+
+        .sign-panel {
+            padding: 10px 20px;
+        }
+
+        .card-header {
+            border: none !important;
+        }
+
+            .sign-panel > img {
+                width: 150px !important;
+            }
+
+        hr {
+            margin-top: 8px;
+            margin-bottom: 10px;
+            border: 0;
+            border-top: 1px solid rgb(0 0 0 / 65%);
+        }
+    </style>
+}
+    <section class="content report-print">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Main content -->
+                    @*<div class="invoice p-3 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card-header" style="text-align: center;">
+                                    <h1><strong>SHREE BALAJI LOGISTICS</strong></h1>
+                                    <p style="font-size: 21px;">
+                                        Flat No.4, A-04, Morisis Hsg. Society, Plot No. RH-23/1, G-Block, Sambhaji Nagar, Chinchwad,<br />
+                                        Pune - 411019. Mob.: 8888825406, 7262000062, 9028070524  Email : shreebalajilohistics1@rediffmail.com
+                                    </p>
+                                </div>
+                            </div>
+                        </div>*@
+                        <!-- title row -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card-header" style="text-align: center;">
+                                    <h3><strong> PAYMENT VOUCHER </strong></h3>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>
+                                    <strong class="float-right">Date: @(DateTime.Now.ToString("dd/MM/yyyy"))</strong>
+                            </h4>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- info row -->
+                    <div class="row invoice-info">
+                        <!-- /.col -->
+                        <div class="col-sm-6 invoice-col">
+                            <table>
+                                <tr><th>Voucher No </th><td><b>: </b> @Model.voucherNo</td></tr>
+                                <tr><th>Date </th> <td><b>: </b> @Model.createdDate.Value.Date</td></tr>
+                                <tr><th>Pay To </th> <td><b>: </b> @Model.driverName</td></tr>
+                            </table>
+                        </div>
+                        <div class="col-sm-6 invoice-col">
+                            <table>
+                                <tr><th>Driver Incharge </th><td><b>: </b> @Model.driverIncharge</td></tr>
+                                <tr><th>Model </th> <td><b>: </b> @Model.model</td></tr>
+                                <tr><th>Destination </th> <td><b>: </b> @Model.destination</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <hr />
+                    <!-- Table row -->
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td><strong>SR NO</strong></td>
+                                        <td><strong>DESCRIPTION</strong></td>
+                                        <td class="qtyamt"><strong>DIESEL(Ltr.)</td>
+                                        <td class="qtyamt"><strong>AMOUNT (<i class="fa fa-rupee-sign nav-icon"></i>) </strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.totalHsd > 0)
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>
+                                                Total HSD
+                                            </td>
+                                            <td class="qtyamt">
+                                                @Model.totalHsd
+                                            </td>
+                                            <td class="qtyamt">-</td>
+                                        </tr>
+                                        i += 1;
+                                    }
+                                    @if (Model.spdQty > 0)
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>
+                                                Spot HSD [@Model.spdQty * @Model.spdRate]
+                                            </td>
+                                            <td class="qtyamt">
+                                                @Model.spdQty
+                                            </td>
+                                            <td class="qtyamt">-</td>
+                                        </tr>
+                                        i += 1;
+                                    }
+                                    @if (Model.totalHsd - Model.spdQty > 0)
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>
+                                                Diesel
+                                            </td>
+                                            <td class="qtyamt">@(Model.totalHsd - Model.spdQty)</td>
+                                            <td class="qtyamt">
+                                                @(
+                                                    (Model.totalHsd - Model.spdQty) * 90
+                                                    )
+                                            </td>
+                                        </tr>
+                                        i += 1;
+                                    }
+                                    @if (Model.inRouteExp > 0)
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>Enroute</td>
+                                            <td class="qtyamt">-</td>
+                                            <td class="qtyamt">@(Model.inRouteExp - Model.tollExp)</td>
+                                        </tr>
+                                        i += 1;
+                                    }
+                                    @if (Model.driverPayment > 0)
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>Driver Payment</td>
+                                            <td class="qtyamt">-</td>
+                                            <td class="qtyamt">@Model.driverPayment</td>
+                                        </tr>
+                                        i += 1;
+                                    }
+                                    @if (Model.extraAmt > 0)
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>Extra Payment</td>
+                                            <td class="qtyamt">-</td>
+                                            <td class="qtyamt">@Model.extraAmt</td>
+                                        </tr>
+                                        i += 1;
+                                    }
+                                    @if (Model.loadingCharge > 0)
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>Loading Charges</td>
+                                            <td class="qtyamt">-</td>
+                                            <td class="qtyamt">-@Model.loadingCharge</td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td colspan="3" style="text-align:right;"><b>Total :</b></td>
+                                        <td class="qtyamt"><b>@Model.totalExp</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    @*<div class="row">
+                    <!-- accepted payments column -->
+                    <div class="col-6">
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-6">
+                    <div class="table-responsive">
+                    <table class="table">
+                    <tr>
+                    <th>Total:</th>
+                    <td>@Model.totalExp</td>
+                    </tr>
+                    </table>
+                    </div>
+                    </div>
+                    <!-- /.col -->
+                    </div>*@
+                    <!-- /.row -->
+                    <hr />
+                    <div class="row">
+                        <div class="col-12 sign">
+                           @* <div class="sign-panel">
+                                <img src="../../docs/sbl-stamp.png" />
+                            </div>*@
+                            <span> Transporter Seal & Sign</span>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <!-- this row will not appear when printing -->
+                    <div class="row no-print">
+                        <div class="col-12">
+                            <button onclick="printReport();" class="btn btn-primary float-right"><i class="fas fa-print"></i> Print</button>
+                            @*<button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                <i class="fas fa-download"></i> Generate PDF
+                            </button>*@
+                        </div>
+                    </div>
+                </div>
+                <!-- /.invoice -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+
+@section Scripts {
+    <script>
+        function printReport() {
+            window.print();
+        }
+    </script>
+}

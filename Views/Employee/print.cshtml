@@ -1,0 +1,212 @@
+﻿@model Trans9.Models.Payslip
+@{
+    Layout = null;
+    int i = 1;
+    Employees emp = Model.employee;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payslip</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        .company {
+            margin-bottom:8px;
+        }
+
+        .company h2, p {
+            text-align: center;
+            margin:0px;
+        }
+
+        .company p{
+            margin-bottom: 2px;
+        }
+
+        .info {
+            margin-bottom: 10px;
+        }
+
+        .info table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info table th,
+        .info table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+
+        .main div {
+            float: left;
+        }
+
+        .net-salary {
+            display: block;
+        }
+
+        .net-salary p{
+            text-align:left;
+        }
+
+        .earnings, .deductions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            overflow: hidden;
+            width: 50%;
+        }
+
+        .earnings table, .deductions table {
+            width: 100%;
+            border-collapse: collapse;
+            float: left;
+        }
+
+        .earnings table th,
+        .deductions table th,
+        .earnings table td,
+        .deductions table td {
+            border: 1px solid #ccc;
+            padding: 5px;
+            height: 18px !important;
+        }
+
+        .earnings table td,
+        .deductions table td {
+            text-align:right;
+        }
+
+        .total {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .note{
+            font-size: x-small;
+            font-weight: bold;
+            max-width: 840px;
+            margin: 0px auto;
+            padding-top: 5px;
+        }
+    </style>
+</head>
+<body onload="javascript:printReport()">
+    <div class="container">
+        <div class="company">
+            <h2>SHREE BALAJI LOGISTICS</h2>
+            <p>Flat No.4, A-04, Morisis Hsg. Society, Plot No.RH-23/1, G-Block,</p>
+            <p>Sambhaji Nagar,Chinchwad, Pune - 411019. </p>
+            <p><span style="margin-right:20px;">Mob.: 8888825406,7262000062</span> <span>Email : shreebalajilohistics1@rediffmail.com</span></p>
+        </div>
+        <div class="info">
+            @if (emp != null)
+            {
+                <table>
+                    <tr><th colspan="4"><h3 style="margin:0px;">Pay Slip for @($"{Model.monthName} {Model.year}")</h3></th></tr>
+                    <tr>
+                        <th>Employee Id:</th>
+                        <td>@($"sbl/pun/{emp.employeeId}")</td>
+                        <th>Pay Period:</th>
+                        <td>@($"{Model.monthName} {Model.year}")</td>
+                    </tr>
+                    <tr>
+                        <th>Employee Name:</th>
+                        <td>@($"{emp.firstName} {emp.lastName}")</td>
+                        <th>Date of Payment:</th>
+                        <td>@Model.paymentDate.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                </table>
+            }
+        </div>
+        <div class="main">
+            <div class="earnings">
+                <table>
+                    <tr>
+                        <th colspan="2">Earnings:</th>
+                    </tr>
+                    <tr>
+                        <th>Basic Salary:</th>
+                        <td>@Model.basic</td>
+                    </tr>
+                    <tr>
+                        <th>Convenience:</th>
+                        <td>@Model.conveniance</td>
+                    </tr>
+                    <tr>
+                        <th>Medical Allowances</th>
+                        <td>@Model.hic</td>
+                    </tr>
+                    <tr>
+                        <th>Travelling Allowances</th>
+                        <td>@Model.lta</td>
+                    </tr>
+                    <tr>
+                        <th>Other Allowances:</th>
+                        <td>@Model.oa</td>
+                    </tr>
+                    <tr class="total">
+                        <th>Total Earnings:</th>
+                        <td>@(Model.basic + Model.conveniance + Model.hic + Model.lta + Model.oa)</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="deductions">
+                <table>
+                    <tr>
+                        <th colspan="2">Deductions:</th>
+                    </tr>
+                    <tr>
+                        <th>Tax:</th>
+                        <td>@(Model.taxRate == 0 ? Model.taxRate : (Model.taxable * Model.taxRate) / 100)</td>
+                    <tr>
+                        <th>Other Deductions:</th>
+                        <td>@Model.od</td>
+                    </tr>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td></td>
+                    </tr>
+                    <tr class="total">
+                        <th>Total Deductions:</th>
+                        <td>@((Model.taxRate == 0 ? 0 : (Model.taxable * Model.taxRate) / 100) + Model.od)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="net-salary">
+            <p><strong>Net Salary (After Deductions):</strong> <strong>@((Model.basic + Model.conveniance + Model.hic + Model.lta + Model.oa) - ((Model.taxRate == 0 ? 0 : (Model.taxable * Model.taxRate) / 100) + Model.od))</strong></p>
+        </div>
+    </div>
+    <div class="note">*Computer generated slip, stamp and signature are not required.</div>
+    <script>
+        function printReport() {
+            window.print();
+        }
+    </script>
+</body>
+</html>

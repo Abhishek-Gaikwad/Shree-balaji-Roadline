@@ -1,0 +1,207 @@
+﻿@model IEnumerable<Trans9.Models.Pages>
+@{
+    bool masterActive = false, transactActive = false, billingActive = false, incidenceActive = false, reportActive = false, permitActive = false, employeeActive = false;
+    List<Pages> master = new List<Pages>();
+    List<Pages> transact = new List<Pages>();
+    List<Pages> billing = new List<Pages>();
+    List<Pages> incidence = new List<Pages>();
+    List<Pages> report = new List<Pages>();
+    List<Pages> permit = new List<Pages>();
+    List<Pages> employee = new List<Pages>();
+    if (Model.Any())
+    {
+        master = Model.Where(o => o.pgGroup.Equals(PageGroup.master.ToString())).ToList();
+        transact = Model.Where(o => o.pgGroup.Equals(PageGroup.transact.ToString())).ToList();
+        billing = Model.Where(o => o.pgGroup.Equals(PageGroup.billing.ToString())).ToList();
+        incidence = Model.Where(o => o.pgGroup.Equals(PageGroup.incidence.ToString())).ToList();
+        permit = Model.Where(o => o.pgGroup.Equals(PageGroup.permit.ToString())).ToList();
+        report = Model.Where(o => o.pgGroup.Equals(PageGroup.report.ToString())).ToList();
+        employee = Model.Where(o => o.pgGroup.Equals(PageGroup.employee.ToString())).ToList();
+    }
+}
+<div class="sidebar">
+    <!-- SidebarSearch Form -->
+    <div class="form-inline">
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            @if (master.Any())
+            {
+                masterActive = master.Where(x => !string.IsNullOrEmpty(x.active)).Any();
+                <li class="nav-item @(masterActive? "menu-open":"")">
+                    <a href="#" class="nav-link @(masterActive? "active":"")">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            MASTER DATA
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @foreach (var item in master)
+                        {
+                            <li class="nav-item">
+                                <a href="/@item.urlName" class="nav-link @item.active">
+                                    <i class="@item.icon nav-icon"></i>
+                                    <p>@item.pageName</p>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+            @if (transact.Any())
+            {
+                transactActive = transact.Where(x => !string.IsNullOrEmpty(x.active)).Any();
+                <li class="nav-item @(transactActive? "menu-open":"")">
+                    <a href="#" class="nav-link @(transactActive? "active":"")">
+                        <i class="nav-icon fas fa-notes-medical"></i>
+                        <p>
+                            SHIPMENT / MOVEMENT
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @foreach (var item in transact)
+                        {
+                            <li class="nav-item">
+                                <a href="/@item.urlName" class="nav-link @item.active">
+                                    <i class="@item.icon nav-icon"></i>
+                                    <p>@item.pageName</p>
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </li>
+            }
+            @if (incidence.Any())
+            {
+                incidenceActive = incidence.Where(x => !string.IsNullOrEmpty(x.active)).Any();
+                <li class="nav-item @(incidenceActive? "menu-open":"")">
+                    <a href="#" class="nav-link @(incidenceActive? "active":"")">
+                        <i class="nav-icon fas fa-notes-medical"></i>
+                        <p>
+                            INCIDENCE
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @foreach (var item in incidence)
+                        {
+                            <li class="nav-item">
+                                <a href="/@item.urlName" class="nav-link @item.active">
+                                    <i class="@item.icon nav-icon"></i>
+                                    <p>@item.pageName</p>
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </li>
+            }
+            @if (billing.Any())
+            {
+                billingActive = billing.Where(x => !string.IsNullOrEmpty(x.active)).Any();
+                <li class="nav-item @(billingActive? "menu-open":"")">
+                    <a href="#" class="nav-link @(billingActive? "active":"")">
+                        <i class="nav-icon fas fa-notes-medical"></i>
+                        <p>
+                            BILLING  &amp; PAYMENT
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @foreach (var item in billing)
+                        {
+                            <li class="nav-item">
+                                <a href="/@item.urlName" class="nav-link @item.active">
+                                    <i class="@item.icon nav-icon"></i>
+                                    <p>@item.pageName</p>
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </li>
+            }
+            @if (report.Any())
+            {
+                reportActive = report.Where(x => !string.IsNullOrEmpty(x.active)).Any();
+                <li class="nav-item @(reportActive? "menu-open":"")">
+                    <a href="#" class="nav-link @(reportActive? "active":"")">
+                        <i class="nav-icon fas fa-notes-medical"></i>
+                        <p>
+                            REPORTS
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @foreach (var item in report)
+                        {
+                            <li class="nav-item">
+                                <a href="/@item.urlName" class="nav-link @item.active">
+                                    <i class="@item.icon nav-icon"></i>
+                                    <p>@item.pageName</p>
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </li>
+            }
+            @if (employee.Any())
+            {
+                employeeActive = employee.Where(x => !string.IsNullOrEmpty(x.active)).Any();
+                <li class="nav-item @(employeeActive? "menu-open":"")">
+                    <a href="#" class="nav-link @(employeeActive? "active":"")">
+                        <i class="nav-icon fas fa-notes-medical"></i>
+                        <p>
+                            EMS / PAYROLL
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @foreach (var item in employee)
+                        {
+                            <li class="nav-item">
+                                <a href="/@item.urlName" class="nav-link @item.active">
+                                    <i class="@item.icon nav-icon"></i>
+                                    <p>@item.pageName</p>
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </li>
+            }
+            @if (permit.Any())
+            {
+                permitActive = permit.Where(x => !string.IsNullOrEmpty(x.active)).Any();
+                <li class="nav-item @(permitActive? "menu-open":"")">
+                    <a href="#" class="nav-link @(permitActive? "active":"")">
+                        <i class="nav-icon fas fa-notes-medical"></i>
+                        <p>
+                            USER &amp; ROLES
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @foreach (var item in permit)
+                        {
+                            <li class="nav-item">
+                                <a href="/@item.urlName" class="nav-link @item.active">
+                                    <i class="@item.icon nav-icon"></i>
+                                    <p>@item.pageName</p>
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </li>
+            }
+        </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+</div>

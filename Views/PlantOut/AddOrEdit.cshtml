@@ -1,0 +1,105 @@
+﻿@model Trans9.Models.PlantOut
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit" asp-route-id="@Model.ewayId" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ewayId" />
+            <input type="hidden" asp-for="shipmentId" />
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="shipmentNo" class="control-label"></label>
+                        <input asp-for="shipmentNo" class="form-control" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="chasisNo" class="control-label"></label>
+                        <input asp-for="chasisNo" class="form-control" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="modelDesc" class="control-label"></label>
+                        <input asp-for="modelDesc" class="form-control" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="dest" class="control-label"></label>
+                        <input asp-for="dest" class="form-control" readonly="readonly" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="createdDate" class="control-label"></label>
+                        <input asp-for="createdDate" class="form-control" />
+                        <span asp-validation-for="createdDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="ewayNo" class="control-label"></label>
+                        <input asp-for="ewayNo" class="form-control" onkeyup="return hideStatue(this);" />
+                        <span asp-validation-for="ewayNo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="expDate" class="control-label"></label>
+                        <input asp-for="expDate" class="form-control" />
+                        <span asp-validation-for="expDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class=" form-group">
+                        <label asp-for="loadingCharges" class="control-label"></label>
+                        <select asp-for="loadingCharges" class="form-control">
+                            <option value="0">0</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group" id="status-block">
+                        <label asp-for="spStatus" class="control-label"></label>
+                        <select class="form-control select2" asp-for="spStatus" asp-items="@(new SelectList(Model.ewayStatus, "Id", "Name"))" onchange="return checkRemark(this)"></select>
+                        <input asp-for="status" type="hidden" value="@Model.spStatus" data-status="@Model.spStatus" class="form-control" />
+                        <span asp-validation-for="spStatus" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6" id="reason-block" style='display:@(Model.spStatus.Equals("Others")? "block":"none");'>
+                    <div class="form-group">
+                        <label asp-for="reason" class="control-label"></label>
+                        <input asp-for="reason" class="form-control" />
+                        <span asp-validation-for="reason" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary btn-block btn-sm mt-4" />
+                        <input type="hidden" asp-for="createdBy" />
+                        <input type="hidden" asp-for="updatedBy" />
+                        <input type="hidden" asp-for="updatedDate" />
+                        <input type="hidden" asp-for="actualPlantOut" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

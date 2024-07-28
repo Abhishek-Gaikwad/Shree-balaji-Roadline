@@ -1,0 +1,85 @@
+﻿@model Trans9.Models.DriverPaymentReport
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-2" style="height: 450px;">
+            <table class="table" id="report-table">
+                <thead>
+                    <tr>
+                        <th colspan="3">
+                            <strong>NO OF TRIPS TILL DATE</strong>
+                        </th>
+                        <td colspan="6"> <strong>@Model.noOfTrips</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="9"></td>
+                    </tr>
+                    <tr>
+                        <th>#</th>
+                        <th>
+                            TRIP DATE
+                        </th>
+                        <th>
+                            INCHARGE NAME
+                        </th>
+                        <th>
+                            DESTINATION
+                        </th>
+                        <th>
+                            VOUCHER NO
+                        </th>
+                        <th>
+                            VOUCHER AMOUNT
+                        </th>
+                        <th>
+                            TOTAL RECEIPTS
+                        </th>
+                        <th>
+                            PAID AMOUNT
+                        </th>
+                        <th>
+                            BALANCE AMOUNT
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.payments.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model.payments)
+                        {
+                            <tr>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tripDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.inchargeName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.destination)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.voucherNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.voucherAmount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.receipts)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.paidAmount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.balanceAmount)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

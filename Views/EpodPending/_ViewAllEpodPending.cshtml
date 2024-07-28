@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Trans9.Models.Shipment>
+<div id="view-all-search">
+    <table id="EpodPendingTable" class="table table-head-fixed text-nowrap table-bordered table-hover DataTable">
+        <thead class="header">
+            <tr>
+                <th>
+                    
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.shipmentNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.shipmentDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.vcNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dest)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.modelDesc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.plantDesc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.chasisNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.invoiceNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.status)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                int i = 1;
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @(i++)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.shipmentNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.shipmentDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.vcNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.dest)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.modelDesc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.plantDesc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.chasisNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.invoiceNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.status)
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+

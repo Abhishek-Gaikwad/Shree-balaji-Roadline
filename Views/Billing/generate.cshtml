@@ -1,0 +1,116 @@
+﻿@model Trans9.Models.IbBillingModel
+
+@{
+    Layout = null;
+}
+<form asp-action="generate" onsubmit="return jQueryIncidencePost(this);" id="billing-form" autocomplete="off">
+    <div class="row">
+        <input type="hidden" asp-for="shipmentNos" />
+        <input type="hidden" asp-for="id" />
+        @*<div class="col-md-3 form-group">
+            <label asp-for="quoteId" class="control-label"></label>
+            <select class="form-control selectpicker" asp-for="quoteId" data-live-search="true" required onchange="return getShipmentsForQuote(this);" multiple="multiple">
+                @foreach (var item in Model.quoteList)
+                {
+                    <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                }
+            </select>
+        </div>*@
+        <div class="col-md-3 form-group">
+            <label asp-for="invoiceNo" class="control-label"></label>
+            <input asp-for="invoiceNo" class="form-control" />
+        </div>
+        <div class="col-md-2 form-group">
+            <label asp-for="invoiceDate" class="control-label"></label>
+            <input asp-for="invoiceDate" class="form-control" />
+        </div>
+        <div class="col-md-2 form-group">
+            <label asp-for="poNumber" class="control-label"></label>
+            <input asp-for="poNumber" class="form-control" />
+        </div>
+        <div class="col-md-2 from-group">
+                <label asp-for="podAtttachedment" class="control-label"></label>
+                <input class="form-control" type="file" asp-for="podAtttachedment" accept="image/*, application/pdf" multiple onchange="return showPreview(this)" />
+        </div>
+        <div class="col-md-2 form-group">
+            <button type="submit" id="submit" class="btn btn-primary btn-block btn-sm mt-4" onclick="return calculateBilling()">Generate Bill</button>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-content">
+            <div class="card-body table-responsive p-0" style="height: 450px;">
+                <table id="table-billing" class="table table-head-fixed text-nowrap table-bordered table-hover">
+                    <thead class="header">
+                        <tr>
+                            <th></th>
+                            <th>
+                                QUOTE NO
+                            </th>
+                            <th>
+                                SHIPMENT NO
+                            </th>
+                            <th>
+                                SHIPMENT DATE
+                            </th>
+                            <th>
+                                VC NO
+                            </th>
+                            <th>
+                                MODEL DESC
+                            </th>
+                            <th>
+                                CHASIS NO
+                            </th>
+                            <th>
+                                INVOICE NO
+                            </th>
+                            <th>
+                                INVOICE DATE
+                            </th>
+                            <th>
+                                TRANSIT DAYS
+                            </th>
+                            <th>
+                                BASIC FREIGHT
+                            </th>
+                            <th>
+                                EN-ROUTE
+                            </th>
+                            <th>
+                                TOTAL FREIGHT
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.shipmentList.Any())
+                        {
+                            @foreach (var s in Model.shipmentList)
+                            {
+                                <tr>
+                                    <td>@s.shipmentId</td>
+                                    <td>@s.quoteNo</td>
+                                    <td>@s.shipmentNo</td>
+                                    <td>@s.shipmentDate.ToString("dd-MM-yyyy")</td>
+                                    <td>@s.vcNo</td>
+                                    <td>@s.modelDesc</td>
+                                    <td>@s.chasisNo</td>
+                                    <td>@s.invoiceNo</td>
+                                    <td>@s.invoiceDate.ToString("dd-MM-yyyy")</td>
+                                    <td>@s.trasitDays</td>
+                                    <td>@s.basicFreight</td>
+                                    <td>@s.enRoute</td>
+                                    <td>@s.totalFreight</td>
+                                </tr>
+                            }                        
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }

@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Trans9.Models.Shipment>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-0" style="height: 450px;">
+            <table id="table-billing" class="table table-head-fixed text-nowrap table-bordered table-hover">
+                <thead class="header">
+                    <tr>
+                        <th></th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.vcNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.modelDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.plantCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.chasisNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.invoiceNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.invoiceDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.trasitDays)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.basicFreight)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.enRoute)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.totalFreight)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.shipmentId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.shipmentNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.shipmentDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.vcNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.modelDesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.plantCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.chasisNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.invoiceNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.invoiceDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.trasitDays)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.basicFreight)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.enRoute)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.totalFreight)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

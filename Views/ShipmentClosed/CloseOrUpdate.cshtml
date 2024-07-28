@@ -1,0 +1,80 @@
+﻿@model Trans9.Models.ShipmentClosed
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="CloseOrUpdate" asp-route-id="@Model.shipmentId" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="shipmentId" />
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="shipmentNo" class="control-label"></label>
+                        <input asp-for="shipmentNo" class="form-control" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="plantoutDate" class="control-label"></label>
+                        <input asp-for="plantoutDate" class="form-control" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="estimatedDate" class="control-label"></label>
+                        <input asp-for="estimatedDate" class="form-control" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="epodDate" class="control-label"></label>
+                        <input asp-for="epodDate" class="form-control" />
+                        <span asp-validation-for="epodDate" class="text-danger"></span>
+                        <input asp-for="epodNo" type="hidden" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group" id="status-block">
+                        <label asp-for="status" class="control-label"></label>
+                        <select class="form-control selectpicker" asp-for="status" data-live-search="true" required>
+                            @foreach (var item in Model.statusList)
+                            {
+                                <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="status" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="expenses" class="control-label"></label>
+                        <input asp-for="expenses" class="form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="narration" class="control-label"></label>
+                        <input asp-for="narration" class="form-control" />
+                        <span asp-validation-for="narration" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input asp-for="reason" type="hidden" class="form-control" />
+                        <input type="submit" value="Submit" class="btn btn-primary btn-block btn-sm mt-4" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

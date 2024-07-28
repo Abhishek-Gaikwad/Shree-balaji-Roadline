@@ -1,0 +1,77 @@
+﻿@model Trans9.Models.Destination
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit" asp-route-id="@Model.detsinationId" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="detsinationId" />
+            <div class="form-group">
+                <label asp-for="destination" class="control-label"></label>
+                <input asp-for="destination" class="form-control" />
+                <span asp-validation-for="destination" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="state" class="control-label"></label>
+                        <input asp-for="state" class="form-control" />
+                        <span asp-validation-for="state" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="region" class="control-label"></label>
+                        <input asp-for="region" class="form-control" />
+                        <span asp-validation-for="region" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="routeCode" class="control-label"></label>
+                        <input asp-for="routeCode" class="form-control" />
+                        <span asp-validation-for="routeCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="trasitDays" class="control-label"></label>
+                        <input asp-for="trasitDays" class="form-control" />
+                        <span asp-validation-for="trasitDays" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="tKms" class="control-label"></label>
+                        <input asp-for="tKms" class="form-control" />
+                        <span asp-validation-for="tKms" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="sblKms" class="control-label"></label>
+                        <input asp-for="sblKms" class="form-control" />
+                        <span asp-validation-for="sblKms" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary btn-block btn-sm" />
+                <input type="hidden" asp-for="createdBy" />
+                <input type="hidden" asp-for="status" />
+                <input type="hidden" asp-for="createdDate" />
+                <input type="hidden" asp-for="updatedBy" />
+                <input type="hidden" asp-for="updatedDate" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

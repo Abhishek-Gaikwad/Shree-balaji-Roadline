@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Trans9.Models.Employees>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-0" style="height: 450px;">
+            <table class="table table-head-fixed text-nowrap table-bordered table-hover">
+                <thead class="header">
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            EMPLOYEE NAME
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.gender)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.dob)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.phoneNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.address)
+                        </th>
+                        <th>
+                            CITY, STATE
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.country)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.postalCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.emergencyContactName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.emergencyContactPhone)
+                        </th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(i++)</td>
+                                <td>
+                                    @($"{item.firstName} {item.lastName}")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.gender)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dob)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.phoneNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.address)
+                                </td>
+                                <td>
+                                    @($"{item.city}, {item.state}")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.country)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.postalCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.emergencyContactName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.emergencyContactPhone)
+                                </td>
+                                <td>
+                                    <a onclick="showInPopup('@Url.Action("AddOrEdit","Employee",new { id=item.employeeId},Context.Request.Scheme)', 'Update Dealer')" class="text-primary"><span class="fa fa-pencil-alt"></span></a>
+                                    <form id="@("form"+item.employeeId)" asp-action="Delete" asp-route-id="@item.employeeId" onsubmit="return jQueryAjaxDelete(this);" class="d-inline">
+                                        <a onclick="javascript:$('#@("form"+item.employeeId)').submit()" class="text-danger"><span class="fa fa-trash"></span></a>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

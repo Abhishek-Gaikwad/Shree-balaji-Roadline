@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Trans9.Models.MfgRoute>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-0" style="height: 450px;">
+            <table class="table table-head-fixed text-nowrap table-bordered table-hover">
+                <thead class="header">
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.mfgRoute)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.basicRate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.inroute)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tollExp)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.totalExp)
+                        </th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.mfgRoute)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.basicRate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.inroute)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tollExp)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.totalExp)
+                                </td>
+                                <td>
+                                    <a onclick="showInPopup('@Url.Action("AddOrEdit","MfgRoute",new { id=item._routId},Context.Request.Scheme)', 'Update MFG-Route')" class="text-primary"><span class="fa fa-pencil-alt"></span></a>
+                                    <form id="@("form"+item._routId)" asp-action="Delete" asp-route-id="@item._routId" onsubmit="return jQueryAjaxDelete(this);" class="d-inline">
+                                        <a onclick="javascript:$('#@("form"+item._routId)').submit()" class="text-danger"><span class="fa fa-trash"></span></a>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

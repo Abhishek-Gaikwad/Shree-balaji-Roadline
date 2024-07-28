@@ -1,0 +1,172 @@
+﻿@model Trans9.Models.Marching
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            line-height: 1.2;
+        }
+
+        .invoice {
+            width: 260px; /* Adjust the width as per your printer's paper width */
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .details {
+            margin-bottom: 10px;
+        }
+
+        .items {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            .items th, .items td {
+                border: 1px solid #000;
+                padding: 5px;
+            }
+
+        .total {
+            margin-top: 20px;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .qtyamt {
+            text-align: right;
+        }
+
+        .date {
+            float: right;
+        }
+    </style>
+</head>
+<body onload="javascript:printReport()">
+    <div class="invoice">
+        <div class="header">
+            <h2>PAYMENT VOUCHER</h2>
+            @* <h4>Print Date: @(DateTime.Now.ToString("dd/MM/yyyy"))</h4> *@
+        </div>
+        <hr />
+        <div class="details">
+            <p><span class="vcno">Voucher No: <span id="invoiceNo">@Model.voucherNo</span></span> <span class="date">Date: <span id="invoiceDate">@Model.createdDate.Value.Date.ToString("dd/MM/yyyy")</span></span></p>
+            <p>Paid To: <span id="paidTo">@Model.driverName</span></p>
+            <p>Incharge: <span id="incharge">@Model.driverIncharge</span></p>
+            <p>Model No: <span id="modelNo">@Model.model</span></p>
+            <p>Destinaton: <span id="destination">@Model.destination</span></p>
+        </div>
+        <hr />
+
+        <!-- Table row -->
+        <table class="items">
+            <thead>
+                <tr>
+                    <th><b>DESCRIPTION</b></th>
+                    <th class="qtyamt"><b>DIESEL<br />(Ltr.)</b></th>
+                    <th class="qtyamt"><b>AMOUNT (Rs.) </b></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.totalHsd > 0)
+                {
+                    <tr>
+                        <td>
+                            Total HSD
+                        </td>
+                        <td class="qtyamt">
+                            @Model.totalHsd
+                        </td>
+                        <td class="qtyamt">-</td>
+                    </tr>
+                }
+                @if (Model.spdQty > 0)
+                {
+                    <tr>
+                        <td>
+                            Spot HSD [@Model.spdQty * @Model.spdRate]
+                        </td>
+                        <td class="qtyamt">
+                            @Model.spdQty
+                        </td>
+                        <td class="qtyamt">-</td>
+                    </tr>
+                }
+                @if (Model.totalHsd - Model.spdQty > 0)
+                {
+                    <tr>
+                        <td>
+                            Diesel
+                        </td>
+                        <td class="qtyamt">@(Model.totalHsd - Model.spdQty)</td>
+                        <td class="qtyamt">
+                            @(
+                                (Model.totalHsd - Model.spdQty) * 90
+                                )
+                        </td>
+                    </tr>
+                }
+                @if (Model.inRouteExp > 0)
+                {
+                    <tr>
+                        <td>Enroute</td>
+                        <td class="qtyamt">-</td>
+                        <td class="qtyamt">@(Model.inRouteExp - Model.tollExp)</td>
+                    </tr>
+                }
+                @if (Model.driverPayment > 0)
+                {
+                    <tr>
+                        <td>Driver Payment</td>
+                        <td class="qtyamt">-</td>
+                        <td class="qtyamt">@Model.driverPayment</td>
+                    </tr>
+                }
+                @if (Model.extraAmt > 0)
+                {
+                    <tr>
+                        <td>Extra Payment</td>
+                        <td class="qtyamt">-</td>
+                        <td class="qtyamt">@Model.extraAmt</td>
+                    </tr>
+                }
+                @if (Model.loadingCharge > 0)
+                {
+                    <tr>
+                        <td>Loading Charges</td>
+                        <td class="qtyamt">-</td>
+                        <td class="qtyamt">-@Model.loadingCharge</td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="2" style="text-align:right;"><b>Total :</b></td>
+                    <td class="qtyamt"><b>@Model.totalExp</b></td>
+                </tr>
+            </tbody>
+        </table>
+        <hr />
+        <div class="total">
+            <p>Transporter Seal & Sign</p>
+            @* <img src="~/docs/sbl-stamp.png" height="100"/> *@
+        </div>
+    </div>
+</body>
+<script>
+    function printReport() {
+        window.print();
+    }
+</script>
+</html>

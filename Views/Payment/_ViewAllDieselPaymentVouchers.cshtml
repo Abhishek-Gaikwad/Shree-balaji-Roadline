@@ -1,0 +1,149 @@
+﻿@model IEnumerable<Trans9.Models.DieselPayment>
+@{
+    string? dpr = (string)ViewData["dpr"];
+
+}
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-0" style="height: 450px;">
+            <table class="table table-head-fixed text-nowrap table-bordered table-hover">
+                @if (dpr!=null)
+                {
+                    <thead class="header">
+                        <tr>
+                            <th>#</th>
+                            @* <th></th> *@
+                            <th>
+                                @Html.DisplayNameFor(model => model.voucherId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.voucherDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.pumpName)
+                            </th>
+                            <th>
+                                OPENING BALANCE (A)
+                            </th>
+                            <th>
+                                BILL AMOUNT (B)
+                            </th>
+                            @* <th>
+                                @Html.DisplayNameFor(model => model.payableAmount)
+                            </th> *@
+                            <th>
+                                PAYMENT (C)
+                            </th>
+                            <th>
+                                BALANCE AMOUNT (A+B-C)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Any())
+                        {
+                            int i = 1;
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @(i++)
+                                    </td>
+                                    @* <td>
+                        <a href="@Url.Action("print","Marching",new { id=item.id},Context.Request.Scheme)" target="_blank" ><span class="fa fa-print"></span></a>
+                        </td> *@
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.voucherId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.voucherDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.pumpName)
+                                    </td>
+                                    <td>
+                                        @(item.prevBalance > 0 ? item.prevBalance.ToString("0.00") : "")
+                                    </td>
+                                    <td>
+                                        @(item.currentAmount > 0 ? item.currentAmount.ToString("0.00") : "")
+                                    </td>
+                                    @* <td>
+                                        @Html.DisplayFor(modelItem => item.payableAmount)
+                                    </td> *@
+                                    <td>
+                                        @(item.paidAmount > 0  ? item.paidAmount.ToString("0.00"): "")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.balanceAmount)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                }else{
+                <thead class="header">
+                    <tr>
+                        <th>#</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.pumpName)
+                        </th>
+                        <th>
+                            OPENING BALANCE
+                        </th>
+                        <th>
+                            BILL AMOUNT
+                        </th>
+                       @*  <th>
+                            PAYABLE AMOUNT
+                        </th> *@
+                        <th>
+                            PAID AMOUNT
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.balanceAmount)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                        <a onclick="showInPopup('@Url.Action("ViewDieselReportByPump","Payment",new { id=item.pumpId},Context.Request.Scheme)', 'LEGDER: @item.pumpName')" class="text-warning"><span class="fa fa-file-excel"></span></a> |
+                                        <a onclick="showInPopup('@Url.Action("AddOrEditDieselVoucher","Payment",new { id=item.voucherId},Context.Request.Scheme)', 'PAYMENT VOUCHER: @item.pumpName')" class="text-success d-inline"><span class="fa fa-rupee-sign"></span></a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.pumpName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.prevBalance)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.currentAmount)
+                                </td>
+                                @* <td>
+                                    @Html.DisplayFor(modelItem => item.payableAmount)
+                                </td> *@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.paidAmount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.balanceAmount)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

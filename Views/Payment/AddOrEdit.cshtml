@@ -1,0 +1,95 @@
+﻿@model Trans9.Models.InchargePayment
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit" asp-route-id="voucherId" onsubmit="return jQueryIncidencePost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label asp-for="inchargeId" class="control-label">PAID TO INCHARGE</label>
+                    <select class="form-control selectpicker" asp-for="inchargeId" asp-items="@(new SelectList(Model.inchargeList, "Id", "Name"))" onchange="return getPaymentDetails(this)"></select>
+                    <span asp-validation-for="inchargeId" class="text-danger"></span>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="payableAmount" class="control-label">PAYABLE AMOUNT</label>
+                    <input id="payableAmount" name="payableAmount" value="@Model.balanceAmount" class="form-control" readonly />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label asp-for="paidAmount" class="control-label"></label>
+                    <input asp-for="paidAmount" class="form-control" onkeyup="return calculatePayAmount(this);" />
+                    <span asp-validation-for="paidAmount" class="text-danger"></span>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label asp-for="balanceAmount" class="control-label">BALANCE AMOUNT</label>
+                    <input asp-for="balanceAmount" class="form-control" readonly />
+                    <span asp-validation-for="balanceAmount" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label asp-for="voucherDate" class="control-label"></label>
+                    <input asp-for="voucherDate" class="form-control" />
+                    <span asp-validation-for="voucherDate" class="text-danger"></span>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label asp-for="payMode" class="control-label"></label>
+                    <select class="form-control selectpicker" asp-for="payMode">
+                        <option value=""> -- select -- </option>
+                        <option value="cash"> Cash </option>
+                        <option value="upi"> UPI </option>
+                        <option value="net-banking"> Net Banking </option>
+                        <option value="account"> Account Transfer </option>
+                    </select>
+                    <span asp-validation-for="payMode" class="text-danger"></span>
+                </div><input asp-for="remark" type="hidden" class="form-control" />
+                <div class="form-group col-md-3">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block btn-sm mt-4" />
+                    <input type="hidden" asp-for="createdBy" />
+                    <input type="hidden" asp-for="createdDate" />
+                    <input type="hidden" asp-for="updatedBy" />
+                    <input type="hidden" asp-for="updatedDate" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@* <div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.voucherNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.voucherDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.remark)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.amount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.payMode)
+                    </th>
+                    @*<th>
+                    @Html.DisplayNameFor(model => model.payPercentage)
+                    </th>
+                    @*<th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody id="view-vouchers">
+                @await Html.PartialAsync("_ViewVoucherList", Model.vouchers)
+            </tbody>
+        </table>
+    </div>
+</div> *@
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

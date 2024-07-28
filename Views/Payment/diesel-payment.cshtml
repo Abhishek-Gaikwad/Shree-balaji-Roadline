@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Trans9.Models.DieselPayment>
+@section Styles {
+    <link href="../../dist/datatable/css/jquery.datatables.min.css" rel="stylesheet" type="text/css" />
+    <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css" />
+
+    <style>
+        .report-body {
+            padding: 0px 1.25rem !important;
+        }
+
+        .btn-sm {
+            padding: .25rem .5rem;
+            font-size: .875rem;
+            line-height: 1.2;
+            border-radius: 0.2rem;
+        }
+    </style>
+}
+<div class="row">
+    <div class="col-md-9">
+        <h4> @ViewBag.PageTitle</h4>
+    </div>
+    <div class="col-md-3 p-2 text-right">
+        <a onclick="showInPopup('@Url.Action("AddOrEditDieselPayment","Payment",null,Context.Request.Scheme)', 'New Voucher')" class="btn btn-success btn-sm"><span class="fa fa-plus"></span> Add New Voucher</a>
+    </div>
+</div>
+<div id="view-all-transaction">
+    @await Html.PartialAsync("_ViewAllDieselPaymentVouchers", Model)
+</div>
+@section Scripts {
+    <script src="../../dist/datatable/js/jquery.datatables.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src="../../js/app.js" type="text/javascript"></script>
+}

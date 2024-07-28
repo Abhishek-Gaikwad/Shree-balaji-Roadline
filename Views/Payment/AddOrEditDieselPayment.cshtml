@@ -1,0 +1,139 @@
+﻿@model Trans9.Models.DieselRequestModel<Diesel>
+@{
+    Layout = null;
+}
+@section Styles {
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <style>
+        .report-body {
+            padding: 0px 1.25rem !important;
+        }
+    </style>
+}
+<div class="row">
+    <div class="col-md-4 seprator">
+        <form asp-action="GetDieselVoucherList" id="diesel-payment-form" autocomplete="off" method="post" enctype="application/x-www-form-urlencoded">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="fromDate" class="control-label"></label>
+                    <input asp-for="fromDate" class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="toDate" class="control-label"></label>
+                    <input asp-for="toDate" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                        <label for="pumpId" class="control-label"> Pump</label>
+                    <select class="form-control selectpicker" asp-for="pumpId" data-live-search="true" required>
+                        @foreach (var item in Model.ddl)
+                        {
+                            <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mt-4">
+                <div class="form-group">
+                    <button onclick="return getDieselVoucherList(this);" type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> Search</button>
+                    <input type="hidden" asp-for="status"  value="0"/>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <form asp-action="AddOrEditDieselPayment" onsubmit="return jQueryIncidencePost(this);" id="diesel-payment-voucher-form" autocomplete="off" method="post">
+            <div class="row">
+                <input type="hidden" asp-for="vouchers" />
+                <input type="hidden" asp-for="pumpId" />
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="voucherDate" class="control-label"></label>
+                        <input asp-for="voucherDate" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="prevBalance" class="control-label"></label>
+                        <input asp-for="prevBalance" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="currentAmount" class="control-label"></label>
+                        <input asp-for="currentAmount" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="payableAmount" class="control-label"></label>
+                        <input asp-for="payableAmount" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="paidAmount" class="control-label"></label>
+                        <input asp-for="paidAmount" onkeyup="return calculateBalance(this);" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="balanceAmount" class="control-label"></label>
+                        <input asp-for="balanceAmount" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block btn-sm mt-4 btn-pump" onclick="return calculatePumpBilling(this);">Calculate Bill</button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block btn-sm mt-4 btn-pump hidden">Generate Bill</button>
+                        <input type="hidden" asp-for="spdQty" />
+                        <input type="hidden" asp-for="spdRate" />
+                        <input type="hidden" asp-for="spdAmount" />
+                        <input type="hidden" asp-for="status" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="view-all-transaction">
+    @if (Model.data!=null)
+    {
+        @await Html.PartialAsync("_tableDiesel", Model.data)
+    }
+</div>
+
+@section Scripts {
+    <!-- DataTables  & Plugins -->
+    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="../../plugins/jszip/jszip.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            $("#report-table").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["excel"]
+            }).buttons().container().appendTo('#report-table_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+}

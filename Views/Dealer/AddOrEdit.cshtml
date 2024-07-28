@@ -1,0 +1,126 @@
+﻿@model Trans9.Models.Dealer
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit" asp-route-id="@Model.dealerId" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="dealerId" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="dealerName" class="control-label"></label>
+                        <input asp-for="dealerName" class="form-control" />
+                        <span asp-validation-for="dealerName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="dealerType" class="control-label"></label>
+                        <select class="form-control select2" asp-for="dealerType" asp-items="@(new SelectList(Model.dealerTypes, "Id", "Name"))"></select>
+                        <span asp-validation-for="dealerType" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <fieldset>
+                        <legend>Basic Info</legend>                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="city" class="control-label"></label>
+                                    <input asp-for="city" class="form-control" />
+                                    <span asp-validation-for="city" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="state" class="control-label"></label>
+                                    <input asp-for="state" class="form-control" />
+                                    <span asp-validation-for="state" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="region" class="control-label"></label>
+                                    <input asp-for="region" class="form-control" />
+                                    <span asp-validation-for="region" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-4">
+                    <fieldset>
+                        <legend>EPOD Info</legend>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="epodPerson" class="control-label"></label>
+                                    <input asp-for="epodPerson" class="form-control" />
+                                    <span asp-validation-for="epodPerson" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="epodContact" class="control-label"></label>
+                                    <input asp-for="epodContact" class="form-control" />
+                                    <span asp-validation-for="epodContact" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="epodEmail" class="control-label"></label>
+                                    <input asp-for="epodEmail" class="form-control" />
+                                    <span asp-validation-for="epodEmail" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-4">
+                    <fieldset>
+                        <legend>PDI Info</legend>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="pdiPerson" class="control-label"></label>
+                                    <input asp-for="pdiPerson" class="form-control" />
+                                    <span asp-validation-for="pdiPerson" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="pdiContact" class="control-label"></label>
+                                    <input asp-for="pdiContact" class="form-control" />
+                                    <span asp-validation-for="pdiContact" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="pdiEmail" class="control-label"></label>
+                                    <input asp-for="pdiEmail" class="form-control" />
+                                    <span asp-validation-for="pdiEmail" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary btn-block btn-sm" />
+                                <input type="hidden" asp-for="createdBy" />
+                <input type="hidden" asp-for="status" />
+            <input type="hidden" asp-for="createdDate" />
+            <input type="hidden" asp-for="updatedBy" />
+            <input type="hidden" asp-for="updatedDate" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

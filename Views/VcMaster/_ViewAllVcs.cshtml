@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Trans9.Models.VcMaster>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-0" style="height: 450px;">
+            <table class="table table-head-fixed text-nowrap table-bordered table-hover">
+
+                <thead class="header">
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.vcNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.modelDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.mfgCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.plantCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.plantDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.sblKmpl)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tKmpl)
+                        </th>
+                        <th>
+                            ACTION
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.vcNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.modelDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.mfgCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.plantCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.plantDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sblKmpl)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tKmpl)
+                                </td>
+                                <td>
+                                    <a onclick="showInPopup('@Url.Action("AddOrEdit","VcMaster",new { id=item._Id},Context.Request.Scheme)', 'Update VC')" class="text-primary"><span class="fa fa-pencil-alt"></span></a>
+                                    <form id="@("form"+item._Id)" asp-action="Delete" asp-route-id="@item._Id" onsubmit="return jQueryAjaxDelete(this);" class="d-inline">
+                                        <a onclick="javascript:$('#@("form"+item._Id)').submit()" class="text-danger"><span class="fa fa-trash"></span></a>
+                                    </form>
+                                </td>
+                            </tr>
+                        }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

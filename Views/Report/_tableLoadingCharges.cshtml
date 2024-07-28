@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Trans9.Models.LoadingChargesReport>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-2" style="height: 450px;">
+            <table class="table" id="report-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.chassisNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.destination)
+                        </th>
+                         <th>
+                            @Html.DisplayNameFor(model => model.plantCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.modelDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.charges)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.plantOutDate)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.shipmentDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.chassisNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.destination)
+                                </td>
+                                 <td>
+                                    @Html.DisplayFor(modelItem => item.plantCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.modelDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.charges)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.plantOutDate)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

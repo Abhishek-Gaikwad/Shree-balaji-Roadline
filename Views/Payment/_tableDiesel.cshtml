@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Trans9.Models.Diesel>
+<div class="card">
+    <div class="table-content">
+        <div class="table-responsive p-2">
+            <table id="table-diesel-vouchers" class="table table-head-fixed text-nowrap table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.voucherDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.shipmentNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.pumpName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.location)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.receiptNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.rate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.qty)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.amount)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="dieselVoucher">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

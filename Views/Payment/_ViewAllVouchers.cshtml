@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Trans9.Models.InchargePayment>
+<div class="card">
+    <div class="table-content">
+        <div class="card-body table-responsive p-0" style="height: 450px;">
+            <table class="table table-head-fixed text-nowrap table-bordered table-hover">
+                <thead class="header">
+                    <tr>
+                        <th>#</th>
+                        <th></th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.voucherId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.voucherDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.inchargeName)
+                        </th>
+                        @* <th>
+                            @Html.DisplayNameFor(model => model.driverName)
+                        </th> *@
+                        <th>
+                            @Html.DisplayNameFor(model => model.receivedAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.paidAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.balanceAmount)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        int i = 1;
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(i++)
+                                </td>
+                                <td>
+                                    @if (item.referenceNo == 0)
+                                    {
+                                        <a href="@Url.Action("print","Payment",new { id=item.voucherId},Context.Request.Scheme)" target="_blank"><span class="fa fa-print"></span></a>
+                                    }else{
+                                        <a href="@Url.Action("print","Marching",new { id=item.referenceNo},Context.Request.Scheme)" target="_blank"><span class="fa fa-print"></span></a>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.voucherId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.voucherDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.inchargeName)
+                                </td>
+                                @* <td>
+                                    @Html.DisplayFor(modelItem => item.driverName)
+                                </td> *@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.receivedAmount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.paidAmount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.balanceAmount)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

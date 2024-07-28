@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.PageTitle = "Not Found";
+}
+
+<h2>@ViewBag.errorMessage</h2>
+@*<h4>Path: @ViewBag.path</h4>
+<h4>QueryString: @ViewBag.queryString</h4>*@
+
+<p>
+    <a href="@Url.Action("","Home",null,Context.Request.Scheme)" class="btn btn-success btn-sm">Click Here</a>
+    to navigate to the home page..
+</p>

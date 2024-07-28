@@ -1,0 +1,189 @@
+﻿@model Trans9.Models.QuoteDto
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form id="quote-form" asp-action="EditQuote" autocomplete="on">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*Quotation Details*@
+            <fieldset>
+                <legend>Quotation Details</legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="hidden" id="quoteId" value="@Model.quoteId" />
+                        <div class="form-group">
+                            <label for="quoteNo" class="control-label">Quotation No</label>
+                            <input type="text" id="quoteNo" name="quoteNo" value="@Model.quoteNo" placeholder="Quotation No" class="form-control" />
+                            <span validation-for="quoteNo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="quoteFor" class="control-label">Quotation For</label>
+                            <input type="text" id="quoteFor" name="quoteFor" value="@Model.quoteFor" placeholder="Quotation For" class="form-control" />
+                            <span validation-for="quoteFor" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="quoteDate" class="control-label">Quotation Date</label>
+                            <input type="date" id="quoteDate" name="quoteDate" value="@Model.quoteDate" placeholder="Quotation Date" class="form-control" />
+                            <span validation-for="quoteDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            @*Order Details*@
+            <fieldset>
+                <legend>Product Details</legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="modelDesc" class="control-label">Model Description</label>
+                            <select id="modelDesc" name="modelDesc" class="form-control selectpicker" data-live-search="true" required>
+                                @foreach (var item in Model.vcList)
+                                {
+                                    <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                            <span validation-for="modelDesc" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="source" class="control-label">From</label>
+                            <input type="text" id="source" name="source" placeholder="*From Location" class="form-control" />
+                            <span validation-for="source" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="destination" class="control-label">Destination</label>
+                            <select id="destination" name="destination" class="form-control selectpicker" data-live-search="true" required>
+                                @foreach (var item in Model.destinationList)
+                                {
+                                    <option value="@item.Id" data-tokens="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                            <span validation-for="destination" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="totalKms" class="control-label">Total KMs</label>
+                            <input type="text" id="totalKms" name="totalKms" placeholder="*Total KMs" class="form-control" onchange="return calculateBasicFreight();" />
+                            <span validation-for="totalKms" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="qty" class="control-label">QUANTITY</label>
+                            <input type="text" id="qty" name="qty" placeholder="*Quantity" class="form-control"/>
+                            <span validation-for="qty" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="tmlRate" class="control-label">TML Approved Rate</label>
+                            <input type="text" id="tmlRate" name="tmlRate" placeholder="*TML Approved Rate" class="form-control" />
+                            <span validation-for="tmlRate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="sblRate" class="control-label">SBL Discounted Rate</label>
+                            <input type="text" id="sblRate" name="sblRate" placeholder="*SBL Discounted Rate" class="form-control" onchange="return calculateBasicFreight();" />
+                            <span validation-for="sblRate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="basicFreight" class="control-label">Basic Freight</label>
+                            <input type="text" id="basicFreight" name="basicFreight" placeholder="*Basic Freight" class="form-control" onchange="return calculateTotalFreight();" />
+                            <span validation-for="basicFreight" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="enroute" class="control-label">En-Route</label>
+                            <input type="text" id="enroute" name="enroute" placeholder="*En-Route" class="form-control" onchange="return calculateTotalFreight();" />
+                            <span validation-for="enroute" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="totalFreight" class="control-label">Total Freight Charges</label>
+                            <input type="text" id="totalFreight" name="totalFreight" placeholder="*Total Freight Charges" class="form-control" readonly="readonly" />
+                            <span validation-for="totalFreight" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <button id="addToList" type="button" class="btn btn-primary btn-block btn-sm mt-4"><span class="fa fa-plus"></span> Add</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="detailsTable" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>FROM</th>
+                                <th>DESTINATION</th>
+                                <th>TOTAL KMS</th>
+                                <th>QTY</th>
+                                <th>MODEL DESC</th>
+                                <th>TML RATE</th>
+                                <th>SBL RATE</th>
+                                <th>BASIC FREIGHT</th>
+                                <th>EN-ROUTE</th>
+                                <th>TOTAL FREIGHT</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.details.Any())
+                            {
+                                @foreach (var item in Model.details)
+                                {
+                                    <tr>
+                                        <td class="count"></td>
+                                        <td>@item.source</td>
+                                        <td>@item.destination</td>
+                                        <td>@item.totalKms</td>
+                                        <td>@item.qty</td>
+                                        <td>@item.modelDesc</td>
+                                        <td>@item.tmlRate</td>
+                                        <td>@item.sblRate</td>
+                                        <td>@item.basicFreight</td>
+                                        <td>@item.enRoute</td>
+                                        <td>@item.totalFreight</td>
+                                        <td>
+                                            <a data-itemId="0" data-value="@item.Id" href="javascript:()" class="deleteItem text-danger"><span class="fa fa-trash"></span></a>
+                                        </td>
+                                    </tr>
+                                }                                
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-md-3 text-right">
+                    <button type="reset" class="btn btn-default btn-sm" data-dismiss="modal"> Close</button>
+                    <button id="saveOrder" type="submit" class="btn btn-primary btn-sm"><span></span> Save Order</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

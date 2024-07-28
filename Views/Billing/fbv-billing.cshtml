@@ -1,0 +1,116 @@
+﻿@model Trans9.Models.FbvBillingModel
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="fbv-billing" onsubmit="return jQueryIncidencePost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="billId" />
+            <input type="hidden" asp-for="billNo" />
+            <input type="hidden" asp-for="shipmentId" />
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="shipmentNo" class="control-label"></label>
+                        <input asp-for="shipmentNo" class="form-control" readonly />
+                        <span asp-validation-for="shipmentNo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="basicFreight" class="control-label"></label>
+                        @if (Model.billId == 0)
+                        {
+                            <input asp-for="basicFreight" class="form-control" onkeyup="return calculateFreight();" />
+                        }
+                        else
+                        {
+                            <input asp-for="basicFreight" class="form-control" readonly />
+                        }
+                        <span asp-validation-for="basicFreight" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="enRoute" class="control-label"></label>
+                        @if (Model.billId == 0)
+                        {
+                            <input asp-for="enRoute" class="form-control" onkeyup="return calculateFreight();" />
+                        }
+                        else
+                        {
+                            <input asp-for="enRoute" class="form-control" readonly />
+                        }
+                        <span asp-validation-for="enRoute" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="totalFreight" class="control-label"></label>
+                        @if (Model.billId == 0)
+                        {
+                            <input asp-for="totalFreight" class="form-control" readonly />
+                        }
+                        else
+                        {
+                            <input asp-for="totalFreight" class="form-control" />
+                        }
+                        <span asp-validation-for="totalFreight" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="irnNo" class="control-label"></label>
+                        @if (Model.billId == 0)
+                        {
+                            <input asp-for="irnNo" class="form-control" placeholder="Please Enter IRN NO*" />
+                        }
+                        else
+                        {
+                            <input asp-for="irnNo" class="form-control" />
+                        }
+                        <span asp-validation-for="irnNo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3" style='display:@(Model.billId==0? "none":"block");'>
+                    <div class="form-group">
+                        <label asp-for="receivedAmount" class="control-label"></label>
+                        <input asp-for="receivedAmount" class="form-control" />
+                        <span asp-validation-for="receivedAmount" class="text-danger"></span>
+                    </div>
+                </div>
+                @*<div class="col-md-3" style='display:@(Model.billId==0? "none":"block");'>*@
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="billingDate" class="control-label"></label>
+                        <input asp-for="billingDate" class="form-control" />
+                    </div>
+                </div>
+                <div>
+                    <label asp-for="podAtttachedment" class="control-label"></label>
+                    <input class="form-control" type="file" asp-for="podAtttachedment" accept="image/*, application/pdf" multiple onchange="return showPreview(this)" />
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group" style='display:@(Model.billId!=0? "none":"block");'>
+                        <button type="submit" id="submit" class="btn btn-primary btn-block btn-sm mt-4">Generate Bill</button>
+                    </div>
+                    <div class="form-group" style='display:@(Model.billId==0? "none":"block");'>
+                        <button type="submit" id="submit" class="btn btn-primary btn-block btn-sm mt-4">Update Bill</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+

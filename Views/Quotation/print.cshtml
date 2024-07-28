@@ -1,0 +1,419 @@
+﻿@model Trans9.Models.Quotation
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FBV Print</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon/site.webmanifest">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <style type="text/css">
+        .table td, .table th {
+            padding: 1px 1px 1px 7px;
+        }
+
+        .sign {
+            padding: 5px 5px 0px 16px;
+        }
+
+        .sign-panel {
+            padding: 50px;
+        }
+
+        hr {
+            margin-top: 0px;
+            margin-bottom: 10px;
+            border: 0;
+            border-top: 1px solid rgb(0 0 0 / 65%);
+        }
+
+        p {
+            margin: 0px !important;
+            border-bottom: 1px dotted #000 !important;
+        }
+
+        .card-header {
+            margin: 0px !important;
+        }
+
+        tr, th, td {
+            border: 1px solid #000 !important;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Main content -->
+                        <div class="invoice p-3 mb-3">
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table center" style="border: 1px solid #000 !important;">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="12" style="text-align: center;padding: 0.75rem 0 !important;">
+                                                    <h1><strong>M/S SHREE BALAJI LOGISTICS</strong></h1>
+                                                    <h5>FLAT NO.A/4,MORRIS HSG. SOCIETY,PLOT NO.RH23/1, G BLOCK,SAMBHAJI NAGAR,CHINCHWAD,PUNE-411019.</h5>
+                                                    <h5>E-MAILSHREEBALAJILOGISTICS1@REDIFFMAIL.COM,CONTACT-7262000062/7064848484</h5>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="12" style="text-align: center;">
+                                                    <h6 style="margin: 0.2rem !important;">Tax Invoice (issued under Rule )</h6>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2" style="width: 14% !important;">
+                                                    Details of Service Provider (Vendor / Transporter)
+                                                </th>
+                                                <th style="text-align: center; ">LOCATION</th>
+                                                <td colspan="5">MUMBAI</td>
+                                                <th colspan="2">
+                                                    FROM
+                                                    LOCATION
+                                                </th>
+                                                <th colspan="2">
+                                                    TO LOCATION
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>INVOICE NO</th>
+                                                <td colspan="1">@Model.quoteNo</td>
+                                                <th style="text-align: center; ">DEPARTMENT</th>
+                                                <td colspan="5">IB</td>
+                                                <th colspan="2"></th>
+                                            </tr>
+                                            <tr>
+                                                <th width="20%">INVOICE DATE</th>
+                                                <td colspan="1">@Model.quoteDate.ToString("dd-MM-yyyy")</td>
+                                                <th style="text-align: center;">CONTACT EMAIL</th>
+                                                <td colspan="5">pravin.n@tatamotors.com</td>
+                                                <td colspan="2"></td>
+                                            </tr>
+                                            <tr>
+                                                <th width="20%">Billing Doc No</th>
+                                                <td colspan="1">123</td>
+                                                <th style="text-align: center;">PO NUMBER</th>
+                                                <td colspan="5">po123</td>
+                                                <td>MODEL</td>
+                                                <td colspan="2">model123</td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="1">
+                                                    GSTIN OF TRANSPORTE
+                                                </th>
+                                                <td colspan="1">
+                                                    27BDOPS0723A1ZQ
+                                                </td>
+                                                <td colspan="6">
+                                                </td>
+
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Income Tax PAN
+                                                </th>
+                                                <td colspan="1">
+                                                    BDOPS0723A
+                                                </td>
+                                                <td colspan="6">
+                                                </td>
+
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    CIN NO
+                                                </th>
+                                                <td colspan="1">
+                                                    NA
+                                                </td>
+                                                <td colspan="6">
+                                                </td>
+
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    VENDOR CODE
+                                                </th>
+                                                <td colspan="1">
+                                                    S64690
+                                                </td>
+                                                <td colspan="6">
+                                                </td>
+
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Customer No
+                                                </th>
+                                                <td colspan="1">
+                                                    CUST123
+                                                </td>
+                                                <td colspan="6">
+                                                </td>
+                                                <th> Deficiency</th>
+                                                <td colspan="4">NA</td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    NAME
+                                                </th>
+                                                <td colspan="1">
+                                                    TATA MOTORS LTD.
+                                                </td>
+                                                <td colspan="6">
+                                                </td>
+
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    ADDRESS
+                                                </th>
+                                                <td colspan="1">
+                                                    HEAD-SCM. TATA
+                                                    MOTORS LTD.
+                                                    INTERNATIONAL
+                                                    BUSSINESS DIVN. A
+                                                    BLOCK, SHIV SAGAR
+                                                    ESTATE, DR. ANNIE
+                                                </td>
+                                                <td colspan="6">
+                                                    <h5>
+                                                        <strong>
+                                                            MOVEMENT OF IB VEHICLES FROM RSO DHARWAD TO
+                                                            RAXAUL BORDER FROM APRIL`23 TO MAY`23.
+                                                        </strong>
+                                                    </h5>
+                                                </td>
+
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    STATE
+                                                </th>
+                                                <td colspan="1">
+                                                    MAHARASHTRA
+                                                </td>
+                                                <td colspan="6">
+                                                </td>
+
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    STATE CODE
+                                                </th>
+                                                <td colspan="1">
+                                                    27
+                                                </td>
+                                                <td colspan="6">
+                                                </td>
+                                                <td colspan="4">TML Checked by Sign</td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    GSTIN
+                                                </th>
+                                                <td colspan="1">
+                                                    27AAACT2727Q1ZW
+                                                </td>
+                                                <td colspan="6">
+                                                </td>
+
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    PAN No
+                                                </th>
+                                                <td colspan="1">
+                                                    AAACT2727Q
+                                                </td>
+                                                <td colspan="5">
+                                                </td>
+
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    SAC Code
+                                                </th>
+                                                <td colspan="1">
+                                                    By Road - 996799
+                                                </td>
+                                                <td colspan="5">
+                                                </td>
+
+                                                <td colspan="4">TML Authorised by Sign</td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    PLACE OF SUPPLY & STATE
+                                                </th>
+                                                <td colspan="1">
+                                                    By Road - 996799
+                                                </td>
+                                                <td colspan="5">
+                                                </td>
+
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    WHETHER TAX PAYABLE
+                                                </th>
+                                                <td colspan="1">
+                                                    N
+                                                </td>
+                                                <td colspan="5">
+                                                </td>
+
+                                                <td colspan="4"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    DESCRIPTION OF SERVICE
+                                                </th>
+                                                <td colspan="10">
+                                                    By Road - Other land transport services of goods n.e.c
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th colspan="2" style="text-align: center;">MODEL</th>
+                                                <th colspan="2" style="text-align: center;">DESTINATION</th>
+                                                <th colspan="2" style="text-align: center;"> BASIC</th>
+                                                <th colspan="2" style="text-align: center;"> TOLL</th>
+                                                <th colspan="4" style="text-align: center;"> TOTAL</th>
+                                            </tr>
+
+                                            @foreach (var item in Model.QuoteDetails) {
+                                            <tr>
+                                                <td colspan="2" style="text-align: center;">@item.modelDesc</td>
+                                                <td colspan="2" style="text-align: center;">@item.destination</td>
+                                                <td colspan="2" style="text-align: center;">@item.basicFreight</td>
+                                                <td colspan="2" style="text-align: center;">@item.enRoute</td>
+                                                <td colspan="4" style="text-align: right; padding-right: 0.30rem !important;">@item.totalFreight</td>
+                                            </tr>
+
+                                            }
+                                            <tr>
+                                                <th colspan="8" style="text-align: right; padding-right: 0.30rem !important;"> Taxable Value</th>
+                                                <td colspan="4" style="text-align: right; padding-right: 0.30rem !important;">50000</td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="8" style="text-align: right; padding-right: 0.30rem !important;">CGST@9%</th>
+                                                <td colspan="4" style="text-align: right; padding-right: 0.30rem !important;">9000</td>
+                                            </tr>
+                                            <tr>
+
+                                                <th colspan="8" style="text-align: right; padding-right: 0.30rem !important;"> CGST@9%</th>
+                                                <td colspan="4" style="text-align: right; padding-right: 0.30rem !important;">9000</td>
+                                            </tr>
+                                            <tr>
+
+                                                <th colspan="8" style="text-align: right; padding-right: 0.30rem !important;">IGST@18%</th>
+                                                <td colspan="4" style="text-align: right; padding-right: 0.30rem !important;"> 0.00</td>
+                                            </tr>
+                                            <tr>
+
+                                                <th colspan="8" style="text-align: right; padding-right: 0.30rem !important;">TOLL</th>
+                                                <td colspan="4" style="text-align: right; padding-right: 0.30rem !important;">0.00</td>
+                                            </tr>
+                                            <tr>
+
+                                                <th colspan="8" style="text-align: right; padding-right: 0.30rem !important;">TOTAL INVOICE VALUE IN Rs:-</th>
+                                                <td colspan="4" style="text-align: right; padding-right: 0.30rem !important;"> 0.00</td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="1" style="text-align: right; padding-right: 0.30rem !important;">AMOUNT INWORD : </th>
+                                                <td colspan="11"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="12">
+                                                    <h6>
+                                                        Note:- On this invoice the tax collection at source u/s 206C of the Income Tax Act, 1961 is Rs
+                                                    </h6>
+                                                    <h6>
+                                                        THe GST claimed in this invoice will be paid to the Government as per statutory provision
+                                                    </h6>
+                                                    <h6>
+                                                        The GST claimed in this invoice will be paid to the Government as per statutory provision
+                                                    </h6>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="3" colspan="6">
+                                                    Certified that the particulars given above are true & correct
+                                                </td>
+                                                <td colspan="6" style="text-align:center;">For Shree Balaji Logistics</td>
+                                            </tr>
+                                            <tr style="height: 150px !important;">
+                                                <td colspan="6">
+                                                    <div style="text-align:center;">
+                                                        <img style="width: 150px !important;" src="../../docs/sbl-stamp.png" />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6" style="text-align:center;">Authorised Signatory</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="12">
+                                                    <h5>
+                                                        Note:- On this invoice the tax collection at source u/s 206C of the Income Tax Act, 1961 is Rs
+                                                    </h5>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- this row will not appear when printing -->
+                            <div class="row no-print">
+                                <div class="col-12">
+                                    <a href="#" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.invoice -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- Page specific script -->
+    <script>
+        window.addEventListener("load", window.print());
+    </script>
+</body>
+</html>
